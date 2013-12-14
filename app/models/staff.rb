@@ -37,4 +37,31 @@ class Staff < ActiveRecord::Base
     presence
     uniqueness
   end
+
+  before_validation :set_verification_code, on: :create
+
+  after_create do
+    EmailVerificator.verification(self).deliver
+  end
+
+  def full_name
+    "#{self.family_name}#{self.given_name}"
+  end
+
+  def verificate_with(verification_code)
+    if verification_code == self.email_verification_code
+      self.email_verificated = true
+      self.save!
+    end
+  end
+
+  private
+
+  def set_verification_code
+    self.email_verificated = false
+    begin
+      code = SecureRandom.hex(10)
+    end while Staff.exists?(email_verification_code: code)
+    self.email_verification_code = code
+  end
 end

@@ -1,5 +1,9 @@
 IgakutenApp::Application.routes.draw do
-  resources :staffs
+  resources :staffs do
+    member do
+      get 'verificate/:verification_code', action: :verificate, as: :verificate
+    end
+  end
 
   root 'index#index'
   # The priority is based upon order of creation: first created -> highest priority.

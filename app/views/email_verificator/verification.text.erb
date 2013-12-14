@@ -1,0 +1,18 @@
+<%= @staff.full_name %>さん
+
+はじめまして。北大医学展実行委員会です。
+医学展スタッフの仮登録、本当にありがとうございます！
+
+このメールは、仮登録の際に申請していただいたメールアドレスに
+正しくメールを送信できるかどうかの確認メールです。
+
+このメールを受信できたときは、以下のURLにアクセスしてください。
+
+<%= verificate_staff_url(@staff, @staff.email_verification_code) %>
+
+今後の予定については改めてお知らせしますので、それまでお待ちください。
+一緒に医学展を盛り上げましょう！
+
+--------------------
+This email is automatically sent by igakuten staff management system.
+<%= Time.now.strftime("%F %T") %>

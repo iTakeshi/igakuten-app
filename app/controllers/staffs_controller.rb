@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :set_staff, only: [:show, :edit, :update, :destroy]
+  before_action :set_staff, only: [:show, :edit, :update, :destroy, :verificate]
 
   # GET /staffs
   # GET /staffs.json
@@ -59,6 +59,11 @@ class StaffsController < ApplicationController
       format.html { redirect_to staffs_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /staffs/1/verificate/:verification_code
+  def verificate
+    @staff.verificate_with(params[:verification_code])
   end
 
   private
