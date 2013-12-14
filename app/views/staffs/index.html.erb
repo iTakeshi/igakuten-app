@@ -1,0 +1,39 @@
+<h1>Listing staffs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Family name</th>
+      <th>Given name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Grade</th>
+      <th>Gender</th>
+      <th>Provisional</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @staffs.each do |staff| %>
+      <tr>
+        <td><%= staff.family_name %></td>
+        <td><%= staff.given_name %></td>
+        <td><%= staff.phone %></td>
+        <td><%= staff.email %></td>
+        <td><%= staff.grade %></td>
+        <td><%= staff.gender %></td>
+        <td><%= staff.provisional %></td>
+        <td><%= link_to 'Show', staff %></td>
+        <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
+        <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Staff', new_staff_path %>
