@@ -16,16 +16,16 @@
     <%= f.text_field :family_name %>
   </div>
   <div class="field">
+    <%= f.label :family_name_yomi %><br>
+    <%= f.text_field :family_name_yomi %>
+  </div>
+  <div class="field">
     <%= f.label :given_name %><br>
     <%= f.text_field :given_name %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.label :given_name_yomi %><br>
+    <%= f.text_field :given_name_yomi %>
   </div>
   <div class="field">
     <%= f.label :grade %><br>
@@ -34,6 +34,14 @@
   <div class="field">
     <%= f.label :gender %><br>
     <%= f.number_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
   </div>
   <div class="field">
     <%= f.label :provisional %><br>

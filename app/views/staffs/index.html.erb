@@ -4,11 +4,13 @@
   <thead>
     <tr>
       <th>Family name</th>
+      <th>Family name yomi</th>
       <th>Given name</th>
-      <th>Phone</th>
-      <th>Email</th>
+      <th>Given name yomi</th>
       <th>Grade</th>
       <th>Gender</th>
+      <th>Phone</th>
+      <th>Email</th>
       <th>Provisional</th>
       <th></th>
       <th></th>
@@ -20,11 +22,13 @@
     <% @staffs.each do |staff| %>
       <tr>
         <td><%= staff.family_name %></td>
+        <td><%= staff.family_name_yomi %></td>
         <td><%= staff.given_name %></td>
-        <td><%= staff.phone %></td>
-        <td><%= staff.email %></td>
+        <td><%= staff.given_name_yomi %></td>
         <td><%= staff.grade %></td>
         <td><%= staff.gender %></td>
+        <td><%= staff.phone %></td>
+        <td><%= staff.email %></td>
         <td><%= staff.provisional %></td>
         <td><%= link_to 'Show', staff %></td>
         <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
