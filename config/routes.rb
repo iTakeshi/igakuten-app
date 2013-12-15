@@ -1,4 +1,6 @@
 IgakutenApp::Application.routes.draw do
+  resources :teams
+
   resources :sections
 
   resources :staffs do

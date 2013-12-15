@@ -1,5 +1,5 @@
-class Section < ActiveRecord::Base
-  has_many :teams
+class Team < ActiveRecord::Base
+  belongs_to :section
 
   validates :name do
     presence

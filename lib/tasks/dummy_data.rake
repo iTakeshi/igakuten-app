@@ -25,9 +25,20 @@ namespace :dummy do
     end
   end
 
+  desc 'create dummy teams'
+  task :teams => :environment do
+    Section.all.each do |section|
+      1.upto(Random.new(section.id * 5).rand(3) + 2) do |num|
+        Team.create section_id: section.id,
+                    name: "team#{section.id}#{num}"
+      end
+    end
+  end
+
   desc 'setup all dummy data'
   task :setup => :environment do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
+    Rake::Task['dummy:teams'].invoke
   end
 end
