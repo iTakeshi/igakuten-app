@@ -35,10 +35,19 @@ namespace :dummy do
     end
   end
 
+  desc 'create dummy festival_dates'
+  task :festival_dates => :environment do
+    FestivalDate.create day: 1,
+                        date: '2014-06-07'
+    FestivalDate.create day: 2,
+                        date: '2014-06-08'
+  end
+
   desc 'setup all dummy data'
   task :setup => :environment do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
     Rake::Task['dummy:teams'].invoke
+    Rake::Task['dummy:festival_dates'].invoke
   end
 end

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215040336) do
+ActiveRecord::Schema.define(version: 20131215101650) do
+
+  create_table "festival_dates", force: true do |t|
+    t.integer  "day",        null: false
+    t.date     "date",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "festival_dates", ["date"], name: "index_festival_dates_on_date", unique: true
+  add_index "festival_dates", ["day"], name: "index_festival_dates_on_day", unique: true
 
   create_table "sections", force: true do |t|
     t.string   "name",       null: false
