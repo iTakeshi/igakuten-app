@@ -10,9 +10,11 @@ namespace :dummy do
                    gender: num.to_i % 2,
                    phone: "000-0000-00#{num}",
                    email: "#{num}@example.com",
-                   email_verification_code: SecureRandom.hex(10),
-                   email_verificated: num.to_i <= 5 ? false : true,
                    provisional: num.to_i <= 10 ? true : false
+    end
+    Staff.where(given_name: '03'..'30').each do |staff|
+      staff.email_verificated = true
+      staff.save!
     end
   end
 end
