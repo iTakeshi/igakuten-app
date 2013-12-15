@@ -1,5 +1,6 @@
 class Staff < ActiveRecord::Base
   has_and_belongs_to_many :teams
+  has_many :shifts
 
   validates :family_name do
     presence
