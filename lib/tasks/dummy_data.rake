@@ -43,11 +43,23 @@ namespace :dummy do
                         date: '2014-06-08'
   end
 
-  desc 'setup all dummy data'
+  desc 'create dummy periods'
+  task :periods => :environment do
+    (10..16).each do |begins_at|
+      Period.create festival_date_id: 1,
+                     begins_at: "2014-06-07 #{begins_at}:00:00",
+                     ends_at:   "2014-06-07 #{begins_at + 1}:00:00"
+      Period.create festival_date_id: 2,
+                     begins_at: "2014-06-08 #{begins_at}:00:00",
+                     ends_at:   "2014-06-08 #{begins_at + 1}:00:00"
+    end
+  end
+
   task :setup => :environment do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
     Rake::Task['dummy:teams'].invoke
     Rake::Task['dummy:festival_dates'].invoke
+    Rake::Task['dummy:periods'].invoke
   end
 end

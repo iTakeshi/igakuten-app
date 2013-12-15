@@ -1,4 +1,6 @@
 class FestivalDate < ActiveRecord::Base
+  has_many :periods
+
   validates :day do
     presence
     uniqueness
