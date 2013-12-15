@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214042155) do
+ActiveRecord::Schema.define(version: 20131214073703) do
+
+  create_table "sections", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sections", ["name"], name: "index_sections_on_name", unique: true
 
   create_table "staffs", force: true do |t|
     t.string   "family_name",             null: false

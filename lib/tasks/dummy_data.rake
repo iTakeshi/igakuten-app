@@ -17,4 +17,11 @@ namespace :dummy do
       staff.save!
     end
   end
+
+  desc 'create dummy sections'
+  task :sections => :environment do
+    (1..5).each do |num|
+      Section.create name: "section#{num}"
+    end
+  end
 end

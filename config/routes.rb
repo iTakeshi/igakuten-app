@@ -1,4 +1,6 @@
 IgakutenApp::Application.routes.draw do
+  resources :sections
+
   resources :staffs do
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
