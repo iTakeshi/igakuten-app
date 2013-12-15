@@ -55,11 +55,24 @@ namespace :dummy do
     end
   end
 
+  desc 'create dummy quorums'
+  task :quorums => :environment do
+    Team.all.each do |team|
+      baseline = Random.rand(4) + 1
+      Period.all.each do |period|
+        Quorum.create team: team,
+                      period: period,
+                      quorum: baseline + Random.rand(2)
+      end
+    end
+  end
+
   task :setup => :environment do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
     Rake::Task['dummy:teams'].invoke
     Rake::Task['dummy:festival_dates'].invoke
     Rake::Task['dummy:periods'].invoke
+    Rake::Task['dummy:quorums'].invoke
   end
 end
