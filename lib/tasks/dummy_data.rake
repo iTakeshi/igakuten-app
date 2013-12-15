@@ -24,4 +24,10 @@ namespace :dummy do
       Section.create name: "section#{num}"
     end
   end
+
+  desc 'setup all dummy data'
+  task :setup => :environment do
+    Rake::Task['dummy:staffs'].invoke
+    Rake::Task['dummy:sections'].invoke
+  end
 end
