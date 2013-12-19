@@ -8,4 +8,8 @@ class FestivalDate < ActiveRecord::Base
                  greater_than_or_equal_to: 1,
                  less_than_or_equal_to: 4
   end
+  validates :date do
+    presence
+    uniqueness
+  end
 end
