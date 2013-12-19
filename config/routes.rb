@@ -1,4 +1,5 @@
 IgakutenApp::Application.routes.draw do
+  ActiveAdmin.routes(self)
   resources :teams
 
   resources :sections

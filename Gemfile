@@ -14,6 +14,9 @@ gem 'jbuilder', '~> 1.2'
 # Add sexy validation syntax
 gem 'kawaii_validation'
 
+# Administration console
+gem 'activeadmin', github: 'gregbell/active_admin'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
