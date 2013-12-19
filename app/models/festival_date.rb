@@ -12,4 +12,8 @@ class FestivalDate < ActiveRecord::Base
     presence
     uniqueness
   end
+
+  def to_s
+    "#{self.date} （#{self.day}日目）"
+  end
 end
