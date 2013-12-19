@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215132048) do
+ActiveRecord::Schema.define(version: 20131219120604) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -45,11 +45,13 @@ ActiveRecord::Schema.define(version: 20131215132048) do
   add_index "quorums", ["team_id"], name: "index_quorums_on_team_id"
 
   create_table "sections", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "display_order"
   end
 
+  add_index "sections", ["display_order"], name: "index_sections_on_display_order", unique: true
   add_index "sections", ["name"], name: "index_sections_on_name", unique: true
 
   create_table "shifts", force: true do |t|
@@ -93,13 +95,15 @@ ActiveRecord::Schema.define(version: 20131215132048) do
   add_index "staffs_teams", ["team_id"], name: "index_staffs_teams_on_team_id"
 
   create_table "teams", force: true do |t|
-    t.integer  "section_id", null: false
-    t.string   "name",       null: false
+    t.integer  "section_id",    null: false
+    t.string   "name",          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "display_order"
   end
 
   add_index "teams", ["name"], name: "index_teams_on_name", unique: true
+  add_index "teams", ["section_id", "display_order"], name: "index_teams_on_section_id_and_display_order", unique: true
   add_index "teams", ["section_id"], name: "index_teams_on_section_id"
 
   create_table "unavailable_periods", force: true do |t|

@@ -21,7 +21,8 @@ namespace :dummy do
   desc 'create dummy sections'
   task :sections => :environment do
     (1..5).each do |num|
-      Section.create name: "section#{num}"
+      Section.create name: "section#{num}",
+                     display_order: (num - 3) % 5 + 1
     end
   end
 
@@ -30,7 +31,8 @@ namespace :dummy do
     Section.all.each do |section|
       1.upto(Random.new(section.id * 5).rand(3) + 2) do |num|
         Team.create section_id: section.id,
-                    name: "team#{section.id}#{num}"
+                    name: "team#{section.id}#{num}",
+                    display_order: num
       end
     end
   end
