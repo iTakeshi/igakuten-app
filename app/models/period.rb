@@ -8,9 +8,11 @@ class Period < ActiveRecord::Base
 
   validates :begins_at do
     presence
+    uniqueness
   end
   validates :ends_at do
     presence
+    uniqueness
   end
 
   default_scope { includes(:festival_date) }
