@@ -11,4 +11,12 @@ class Team < ActiveRecord::Base
 
   default_scope { includes(:section) }
   scope :ordered, -> { reorder('sections.display_order ASC, teams.display_order ASC') }
+
+  after_create do
+    Period.all.each do |period|
+      Quorum.create period: period,
+                    team: self,
+                    quorum: 0
+    end
+  end
 end

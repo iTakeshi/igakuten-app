@@ -27,6 +27,14 @@ class Period < ActiveRecord::Base
     end
   end
 
+  after_create do
+    Team.all.each do |team|
+      Quorum.create period: self,
+                    team: team,
+                    quorum: 0
+    end
+  end
+
   def to_s
     "#{self.festival_date.day}日目 #{self.begins_at.strftime('%H:%M')} - #{self.ends_at.strftime('%H:%M')}"
   end
