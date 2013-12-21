@@ -1,6 +1,8 @@
 ActiveAdmin.register Team do
   scope :ordered, default: true
 
+  permit_params %i(section_id name display_order)
+
   index do
     column :section
     column :name
