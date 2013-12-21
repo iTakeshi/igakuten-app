@@ -44,10 +44,12 @@ class Staff < ActiveRecord::Base
     uniqueness
   end
 
-  before_validation :set_verification_code, on: :create
+  before_validation do
+    set_verification_code if self.email_changed?
+  end
 
-  after_create do
-    EmailVerificator.verification(self).deliver
+  after_save do
+    EmailVerificator.verification(self).deliver if self.email_changed?
   end
 
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
