@@ -1,6 +1,8 @@
 ActiveAdmin.register FestivalDate do
   scope :ordered, default: true
 
+  permit_params %i(day date)
+
   index do
     column :day
     column :date
