@@ -1,6 +1,8 @@
 ActiveAdmin.register Staff do
   scope :ordered, default: true
 
+  permit_params %i(family_name family_name_yomi given_name given_name_yomi grade gender phone email provisional)
+
   index do
     column :full_name
     column :full_name_yomi
@@ -28,6 +30,21 @@ ActiveAdmin.register Staff do
         staff.provisional_to_s
       end
     end
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :family_name
+      f.input :family_name_yomi
+      f.input :given_name
+      f.input :given_name_yomi
+      f.input :grade,            as: :select, collection: 1..6
+      f.input :gender,           as: :select, collection: { '男' => 1, '女' => 0 }
+      f.input :phone
+      f.input :email
+      f.input :provisional
+    end
+    f.actions
   end
 
   # See permitted parameters documentation:
