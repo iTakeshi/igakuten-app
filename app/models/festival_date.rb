@@ -13,6 +13,8 @@ class FestivalDate < ActiveRecord::Base
     uniqueness
   end
 
+  scope :ordered, -> { reorder('day ASC') }
+
   def to_s
     "#{self.date} （#{self.day}日目）"
   end

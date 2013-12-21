@@ -1,7 +1,5 @@
 ActiveAdmin.register Period do
-  belongs_to :festival_date
-
-  config.sort_order = 'begins_at asc'
+  scope :ordered, default: true
 
   controller do
     def scoped_collection

@@ -13,6 +13,9 @@ class Period < ActiveRecord::Base
     presence
   end
 
+  default_scope { includes(:festival_date) }
+  scope :ordered, -> { reorder('festival_dates.day ASC, begins_at ASC') }
+
   def to_s
     "#{self.festival_date.day}日目 #{self.begins_at.strftime('%H:%M')} - #{self.ends_at.strftime('%H:%M')}"
   end
