@@ -50,8 +50,31 @@ class Staff < ActiveRecord::Base
     EmailVerificator.verification(self).deliver
   end
 
+  scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
+
   def full_name
-    "#{self.family_name}#{self.given_name}"
+    "#{self.family_name} #{self.given_name}"
+  end
+
+  def full_name_yomi
+    "#{self.family_name_yomi} #{self.given_name_yomi}"
+  end
+
+  def gender_to_s
+    case self.gender
+    when 1
+      '男'
+    when 0
+      '女'
+    end
+  end
+
+  def email_verificated_to_s
+    self.email_verificated ? '' : '未確認'
+  end
+
+  def provisional_to_s
+    self.provisional ? '仮' : ''
   end
 
   def verificate_with(verification_code)
