@@ -1,5 +1,9 @@
 ActiveAdmin.register Period do
+  belongs_to :festival_date
+
   scope :ordered, default: true
+
+  permit_params %i(festival_date_id begins_at ends_at)
 
   controller do
     def scoped_collection
