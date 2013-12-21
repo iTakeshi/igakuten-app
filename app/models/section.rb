@@ -5,4 +5,6 @@ class Section < ActiveRecord::Base
     presence
     uniqueness
   end
+
+  scope :ordered, -> { reorder('display_order ASC') }
 end

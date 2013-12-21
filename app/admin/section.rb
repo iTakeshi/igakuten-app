@@ -1,21 +1,16 @@
 ActiveAdmin.register Section do
-  config.sort_order = 'display_order_asc'
+  scope :ordered, default: true
 
   index do
     column :name
     column :display_order
-    column 'Teams' do |section|
-      link_to 'Teams', admin_section_teams_path(section)
-    end
     default_actions
   end
 
   show do
     attributes_table do
       row :name
-      row 'Teams' do |section|
-        link_to 'Teams', admin_section_teams_path(section)
-      end
+      row :display_order
     end
   end
 

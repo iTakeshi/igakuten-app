@@ -1,13 +1,5 @@
 ActiveAdmin.register Team do
-  belongs_to :section
-
-  config.sort_order = 'display_order_asc'
-
-  controller do
-    def scoped_collection
-      super.includes :section
-    end
-  end
+  scope :ordered, default: true
 
   index do
     column :section
@@ -20,6 +12,7 @@ ActiveAdmin.register Team do
     attributes_table do
       row :section
       row :name
+      row :display_order
     end
   end
 
