@@ -10,6 +10,7 @@ ActiveAdmin.register Staff do
     column :email
     column 'メールアドレス確認', :email_verificated_to_s
     column '仮登録', :provisional_to_s
+    default_actions
   end
 
   show do
@@ -20,8 +21,12 @@ ActiveAdmin.register Staff do
       row :gender_to_s
       row :phone
       row :email
-      row 'メールアドレス確認', :email_verificated_to_s
-      row '仮登録', :provisional_to_s
+      row 'メールアドレス確認' do |staff|
+        staff.email_verificated_to_s
+      end
+      row '仮登録' do |staff|
+        staff.provisional_to_s
+      end
     end
   end
 
