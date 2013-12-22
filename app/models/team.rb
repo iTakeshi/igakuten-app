@@ -8,6 +8,10 @@ class Team < ActiveRecord::Base
     presence
     uniqueness
   end
+  validates :display_order do
+    presence
+    uniqueness scope: :section_id
+  end
 
   default_scope { includes(:section) }
   scope :ordered, -> { reorder('sections.display_order ASC, teams.display_order ASC') }
