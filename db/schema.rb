@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131221063610) do
+ActiveRecord::Schema.define(version: 20131222030949) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20131221063610) do
     t.datetime "updated_at"
   end
 
+  add_index "shifts", ["period_id", "staff_id"], name: "index_shifts_on_period_id_and_staff_id", unique: true
   add_index "shifts", ["period_id"], name: "index_shifts_on_period_id"
   add_index "shifts", ["staff_id"], name: "index_shifts_on_staff_id"
   add_index "shifts", ["team_id"], name: "index_shifts_on_team_id"
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 20131221063610) do
     t.integer "team_id"
   end
 
+  add_index "staffs_teams", ["staff_id", "team_id"], name: "index_staffs_teams_on_staff_id_and_team_id", unique: true
   add_index "staffs_teams", ["staff_id"], name: "index_staffs_teams_on_staff_id"
   add_index "staffs_teams", ["team_id"], name: "index_staffs_teams_on_team_id"
 
@@ -116,6 +118,7 @@ ActiveRecord::Schema.define(version: 20131221063610) do
     t.datetime "updated_at"
   end
 
+  add_index "unavailable_periods", ["period_id", "staff_id"], name: "index_unavailable_periods_on_period_id_and_staff_id", unique: true
   add_index "unavailable_periods", ["period_id"], name: "index_unavailable_periods_on_period_id"
   add_index "unavailable_periods", ["staff_id"], name: "index_unavailable_periods_on_staff_id"
 
