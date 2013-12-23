@@ -75,16 +75,17 @@ class Staff < ActiveRecord::Base
     self.email_verificated ? '' : '未確認'
   end
 
-  def provisional_to_s
-    self.provisional ? '仮' : ''
-  end
-
   def verificate_with(verification_code)
     if verification_code == self.email_verification_code
       self.email_verificated = true
       self.email_once_verificated = true
       self.save!
     end
+  end
+
+  def register
+    self.provisional = false
+    self.save!
   end
 
   private

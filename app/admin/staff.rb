@@ -11,7 +11,9 @@ ActiveAdmin.register Staff do
     column :phone
     column :email
     column 'メールアドレス確認', :email_verificated_to_s
-    column '仮登録', :provisional_to_s
+    column '仮登録' do |staff|
+      "仮：#{link_to '本登録する', register_admin_staff_path(staff)}".html_safe if staff.provisional
+    end
     default_actions
   end
 
@@ -27,7 +29,7 @@ ActiveAdmin.register Staff do
         staff.email_verificated_to_s
       end
       row '仮登録' do |staff|
-        staff.provisional_to_s
+        "仮：#{link_to '本登録する', register_admin_staff_path(staff)}".html_safe if staff.provisional
       end
     end
   end
@@ -45,6 +47,12 @@ ActiveAdmin.register Staff do
       f.input :provisional
     end
     f.actions
+  end
+
+  member_action :register, method: :get do
+    staff = Staff.find(params[:id])
+    staff.register
+    redirect_to({ action: :index }, { notice: "#{staff.full_name}さんを本登録しました。" })
   end
 
   # See permitted parameters documentation:
