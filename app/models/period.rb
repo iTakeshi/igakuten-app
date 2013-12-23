@@ -15,7 +15,7 @@ class Period < ActiveRecord::Base
     uniqueness
   end
 
-  default_scope { includes(:festival_date) }
+  default_scope { includes(:festival_date).references(:festival_date) }
   scope :ordered, -> { reorder('festival_dates.day ASC, begins_at ASC') }
 
   def initialize(attributes = {}, options = {})

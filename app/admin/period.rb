@@ -5,12 +5,6 @@ ActiveAdmin.register Period do
 
   permit_params %i(festival_date_id begins_at ends_at)
 
-  controller do
-    def scoped_collection
-      super.includes :festival_date
-    end
-  end
-
   index do
     column :festival_date
     column :begins_at

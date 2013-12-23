@@ -13,7 +13,7 @@ class Team < ActiveRecord::Base
     uniqueness scope: :section_id
   end
 
-  default_scope { includes(:section) }
+  default_scope { includes(:section).references(:section) }
   scope :ordered, -> { reorder('sections.display_order ASC, teams.display_order ASC') }
 
   after_create do
