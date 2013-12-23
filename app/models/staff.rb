@@ -82,6 +82,7 @@ class Staff < ActiveRecord::Base
   def verificate_with(verification_code)
     if verification_code == self.email_verification_code
       self.email_verificated = true
+      self.email_once_verificated = true
       self.save!
     end
   end

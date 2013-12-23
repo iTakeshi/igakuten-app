@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222030949) do
+ActiveRecord::Schema.define(version: 20131223014202) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -71,19 +71,20 @@ ActiveRecord::Schema.define(version: 20131222030949) do
   add_index "shifts", ["team_id"], name: "index_shifts_on_team_id"
 
   create_table "staffs", force: true do |t|
-    t.string   "family_name",             null: false
-    t.string   "family_name_yomi",        null: false
-    t.string   "given_name",              null: false
-    t.string   "given_name_yomi",         null: false
-    t.integer  "grade",                   null: false
-    t.integer  "gender",                  null: false
-    t.string   "phone",                   null: false
-    t.string   "email",                   null: false
-    t.string   "email_verification_code", null: false
+    t.string   "family_name",                             null: false
+    t.string   "family_name_yomi",                        null: false
+    t.string   "given_name",                              null: false
+    t.string   "given_name_yomi",                         null: false
+    t.integer  "grade",                                   null: false
+    t.integer  "gender",                                  null: false
+    t.string   "phone",                                   null: false
+    t.string   "email",                                   null: false
+    t.string   "email_verification_code",                 null: false
     t.boolean  "email_verificated"
     t.boolean  "provisional"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "email_once_verificated",  default: false
   end
 
   add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true

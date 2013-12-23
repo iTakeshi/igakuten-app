@@ -1,0 +1,14 @@
+<%= @staff.full_name %>さん
+
+こんにちは。北大医学展実行委員会です。
+
+このメールは、今回変更された新しいメールアドレスに
+正しくメールを送信できるかどうかの確認メールです。
+
+このメールを受信できたときは、以下のURLにアクセスしてください。
+
+<%= verificate_staff_url(@staff, @staff.email_verification_code) %>
+
+--------------------
+This email is automatically sent by igakuten staff management system.
+<%= Time.now.strftime("%F %T") %>
