@@ -3,7 +3,7 @@ class SectionsController < ApplicationController
 
   # GET /sections.json
   def index
-    @sections = Section.all
+    @sections = Section.ordered
   end
 
   # GET /sections/1.json
