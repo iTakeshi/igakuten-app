@@ -6,6 +6,9 @@ IgakutenApp::Application.routes.draw do
   resources :sections, only: [:index, :show]
 
   resources :staffs,   only: [:index, :show] do
+    collection do
+      get 'teams'
+    end
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
     end
