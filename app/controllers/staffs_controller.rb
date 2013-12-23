@@ -17,7 +17,6 @@ class StaffsController < ApplicationController
 
   # GET /staffs/teams
   def teams
-    @staffs = Staff.all
   end
 
   private

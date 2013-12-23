@@ -1,0 +1,19 @@
+<table id="staffs-teams">
+  <thead>
+    <tr>
+      <th>学年</th>
+      <th>性別</th>
+      <th>氏名</th>
+      <!-- ko foreach: teams -->
+        <th data-bind="text: name"></th>
+      <!-- /ko -->
+    </tr>
+  </thead>
+  <tbody data-bind="foreach: staffs">
+    <tr>
+      <td data-bind="text: grade"></td>
+      <td data-bind="text: gender_to_s"></td>
+      <th data-bind="text: full_name"></th>
+    </tr>
+  </tbody>
+</table>
