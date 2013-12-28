@@ -11,11 +11,19 @@
       <!-- /ko -->
     </tr>
   </thead>
-  <tbody data-bind="foreach: staffs">
+  <tbody data-bind="foreach: { data: staffs, as: 'staff' }">
     <tr>
       <td data-bind="text: grade"></td>
-      <td data-bind="text: gender_to_s"></td>
-      <th data-bind="text: full_name"></th>
+      <td data-bind="text: gender"></td>
+      <th data-bind="text: name"></th>
+      <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
+        <!-- ko if: staff.participate_in(team.id) -->
+          <td>o</td>
+        <!-- /ko -->
+        <!-- ko ifnot: staff.participate_in(team.id) -->
+          <td></td>
+        <!-- /ko -->
+      <!-- /ko -->
     </tr>
   </tbody>
 </table>
