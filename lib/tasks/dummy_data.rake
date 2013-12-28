@@ -36,6 +36,16 @@ namespace :dummy do
     end
   end
 
+  desc 'create dummy staffs-teams association'
+  task :staffs_teams => :environment do
+    Staff.all.each do |staff|
+      prob = (Random.rand(5) + 1).to_f / 15
+      Team.all.each do |team|
+        staff.teams << team if Random.rand < prob
+      end
+    end
+  end
+
   desc 'create dummy festival_dates'
   task :festival_dates => :environment do
     FestivalDate.create day: 1,
@@ -72,6 +82,7 @@ namespace :dummy do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
     Rake::Task['dummy:teams'].invoke
+    Rake::Task['dummy:staffs_teams'].invoke
     Rake::Task['dummy:festival_dates'].invoke
     Rake::Task['dummy:periods'].invoke
     Rake::Task['dummy:quorums'].invoke
