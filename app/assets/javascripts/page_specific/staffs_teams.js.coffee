@@ -19,4 +19,4 @@ $ ->
             teams = data
 
     staffsTeamsModel = new StaffsTeamsModel(staffs, teams)
-    ko.applyBindings staffsTeamsModel, $('#staffs-teams')[0]
+    ko.applyBindings staffsTeamsModel
