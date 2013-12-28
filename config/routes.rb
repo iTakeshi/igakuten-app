@@ -11,6 +11,8 @@ IgakutenApp::Application.routes.draw do
     end
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
+      post 'participate/:team_id', action: :participate
+      post 'unparticipate/:team_id', action: :unparticipate
     end
   end
 

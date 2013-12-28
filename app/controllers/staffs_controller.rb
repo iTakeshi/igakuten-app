@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :set_staff, only: [:show, :verificate]
+  before_action :set_staff, only: [:show, :verificate, :participate, :unparticipate]
 
   # GET /staffs.json
   def index
@@ -17,6 +17,18 @@ class StaffsController < ApplicationController
 
   # GET /staffs/teams
   def teams
+  end
+
+  # POST /staffs/1/participate/:team_id
+  def participate
+    @staff.teams << Team.find(params[:team_id])
+    render json: { status: :success }
+  end
+
+  # POST /staffs/1/unparticipate/:team_id
+  def unparticipate
+    @staff.teams.destroy Team.find(params[:team_id])
+    render json: { status: :success }
   end
 
   private
