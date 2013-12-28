@@ -53,6 +53,7 @@ class Staff < ActiveRecord::Base
   end
 
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
+  scope :with_teams, -> { includes(:teams) }
 
   def full_name
     "#{self.family_name} #{self.given_name}"

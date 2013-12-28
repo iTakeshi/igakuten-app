@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
 
   # GET /staffs.json
   def index
-    @staffs = Staff.ordered
+    @staffs = Staff.ordered.with_teams
   end
 
   # GET /staffs/1.json
