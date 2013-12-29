@@ -1,7 +1,7 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :shifts,   only: [] do
+  resources :shifts,   only: [:index] do
     collection do
       get 'designer'
     end
