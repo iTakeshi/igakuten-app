@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
 
-  # GET /shifts
-  def index
+  # GET /shifts/designer
+  def designer
   end
 end
