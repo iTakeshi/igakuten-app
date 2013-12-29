@@ -38,4 +38,8 @@ class Period < ActiveRecord::Base
   def to_s
     "#{self.festival_date.day}日目 #{self.begins_at.strftime('%H:%M')} - #{self.ends_at.strftime('%H:%M')}"
   end
+
+  def time
+    "#{self.begins_at.strftime('%H:%M')} - #{self.ends_at.strftime('%H:%M')}"
+  end
 end

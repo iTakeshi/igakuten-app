@@ -1,6 +1,8 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
+  resources :periods,  only: [:index]
+
   resources :teams,    only: [:index, :show]
 
   resources :sections, only: [:index, :show]
