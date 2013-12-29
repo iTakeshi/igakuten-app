@@ -1,0 +1,29 @@
+<%= javascript_include_tag 'page_specific/staffs_recesses' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>学年</th>
+      <th>性別</th>
+      <th>氏名</th>
+      <!-- ko foreach: periods -->
+        <th data-bind="text: time"></th>
+      <!-- /ko -->
+    </tr>
+  </thead>
+  <tbody data-bind="foreach: { data: staffs, as: 'staff' }">
+    <tr>
+      <td data-bind="text: grade"></td>
+      <td data-bind="text: gender"></td>
+      <th data-bind="text: name"></th>
+      <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
+        <!-- ko if: staff.recessing(period) -->
+          <td><button data-bind="click: staff.return.bind(period)">休憩中</button></td>
+        <!-- /ko -->
+        <!-- ko ifnot: staff.recessing(period) -->
+          <td><button data-bind="click: staff.recess.bind(period)">休憩する</button></td>
+        <!-- /ko -->
+      <!-- /ko -->
+    </tr>
+  </tbody>
+</table>
