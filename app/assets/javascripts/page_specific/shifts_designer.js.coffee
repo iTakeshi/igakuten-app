@@ -19,7 +19,9 @@ $ ->
                 when 0
                     ""
                 when 1
-                    shift[0].team_id()
+                    team = $.grep window.teams, (team) ->
+                        if shift[0].team_id() == team.id then true else false
+                    team[0].name
                 else
                     console.log 'Error: conflicting shifts'
                     ""
@@ -59,6 +61,13 @@ $ ->
         dataType: 'json',
         success: (data) ->
             periods = data
+
+    window.teams = []
+    $.ajax '/teams.json',
+        async: false,
+        dataType: 'json',
+        success: (data) ->
+            window.teams = data
 
     shiftDesignerModel = new ShiftDesignerModel(staffs, periods)
     ko.applyBindings shiftDesignerModel
