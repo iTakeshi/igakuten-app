@@ -19,15 +19,24 @@ namespace :dummy do
 
   desc 'create dummy sections'
   task :sections => :environment do
+    if Section.where(name: '休憩').count == 0
+      Section.create name: '休憩',
+                     display_order: 1
+    end
     (1..5).each do |num|
       Section.create name: "section#{num}",
-                     display_order: (num - 3) % 5 + 1
+                     display_order: (num - 3) % 5 + 2
     end
   end
 
   desc 'create dummy teams'
   task :teams => :environment do
-    Section.all.each do |section|
+    if Team.where(name: '休憩').count == 0
+      Team.create section_id: Section.where(name: '休憩')[0].id,
+                  name: '休憩',
+                  display_order: 1
+    end
+    Section.where.not(name: '休憩').each do |section|
       1.upto(Random.new(section.id * 5).rand(3) + 2) do |num|
         Team.create section_id: section.id,
                     name: "team#{section.id}#{num}",
