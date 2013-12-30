@@ -19,20 +19,19 @@ class StaffsController < ApplicationController
   def teams
   end
 
-  # POST /staffs/1/participate/:team_id
+  # POST /staffs/1/participate/:team_id.json
   def participate
     @staff.teams << Team.find(params[:team_id])
     render json: { status: :success }
   end
 
-  # POST /staffs/1/unparticipate/:team_id
+  # POST /staffs/1/unparticipate/:team_id.json
   def unparticipate
     @staff.teams.destroy Team.find(params[:team_id])
     render json: { status: :success }
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_staff
     @staff = Staff.find(params[:id])
   end
