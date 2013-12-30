@@ -6,10 +6,6 @@ class StaffsController < ApplicationController
     @staffs = Staff.ordered.with_teams
   end
 
-  # GET /staffs/1.json
-  def show
-  end
-
   # GET /staffs/1/verificate/:verification_code
   def verificate
     @staff.verificate_with(params[:verification_code])

@@ -1,19 +1,19 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :shifts,   only: [:index] do
+  resources :shifts,   only: :index do
     collection do
       get 'designer'
     end
   end
 
-  resources :periods,  only: [:index]
+  resources :periods,  only: :index
 
-  resources :teams,    only: [:index, :show]
+  resources :teams,    only: :index
 
-  resources :sections, only: [:index, :show]
+  resources :sections, only: :index
 
-  resources :staffs,   only: [:index, :show] do
+  resources :staffs,   only: :index do
     collection do
       get 'teams'
     end
