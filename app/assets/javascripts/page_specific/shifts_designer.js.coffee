@@ -12,6 +12,18 @@ $ ->
             @name   = ko.observable(name)
             @shifts = ko.observableArray(shifts)
 
+        teamWorkingWith: (period) ->
+            shift = $.grep @shifts(), (shift) ->
+                if period.id == shift.period_id() then true else false
+            switch shift.length
+                when 0
+                    ""
+                when 1
+                    shift[0].team_id()
+                else
+                    console.log 'Error: conflicting shifts'
+                    ""
+
     class Shift
         constructor: (period_id, team_id, staff_id) ->
             @period_id = ko.observable(period_id)

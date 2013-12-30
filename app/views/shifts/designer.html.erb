@@ -17,6 +17,7 @@
       <td data-bind="text: gender"></td>
       <th data-bind="text: name"></th>
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
+        <td data-bind="text: staff.teamWorkingWith(period)"></td>
       <!-- /ko -->
     </tr>
   </tbody>
