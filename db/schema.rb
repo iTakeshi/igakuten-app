@@ -112,15 +112,4 @@ ActiveRecord::Schema.define(version: 20131223014202) do
   add_index "teams", ["section_id", "display_order"], name: "index_teams_on_section_id_and_display_order", unique: true
   add_index "teams", ["section_id"], name: "index_teams_on_section_id"
 
-  create_table "unavailable_periods", force: true do |t|
-    t.integer  "staff_id"
-    t.integer  "period_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "unavailable_periods", ["period_id", "staff_id"], name: "index_unavailable_periods_on_period_id_and_staff_id", unique: true
-  add_index "unavailable_periods", ["period_id"], name: "index_unavailable_periods_on_period_id"
-  add_index "unavailable_periods", ["staff_id"], name: "index_unavailable_periods_on_staff_id"
-
 end

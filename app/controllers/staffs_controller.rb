@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :set_staff, except: %i(index teams recesses)
+  before_action :set_staff, except: %i(index teams)
 
   # GET /staffs.json
   def index
@@ -28,22 +28,6 @@ class StaffsController < ApplicationController
   # POST /staffs/1/unparticipate/:team_id
   def unparticipate
     @staff.teams.destroy Team.find(params[:team_id])
-    render json: { status: :success }
-  end
-
-  # GET /staffs/recesses
-  def recesses
-  end
-
-  # POST /staffs/1/recess/:period_id
-  def recess
-    @staff.recesses << Period.find(params[:period_id])
-    render json: { status: :success }
-  end
-
-  # POST /staffs/1/return/:period_id
-  def return
-    @staff.recesses.destroy Period.find(params[:period_id])
     render json: { status: :success }
   end
 

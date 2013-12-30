@@ -1,9 +1,7 @@
 class Staff < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_many :shifts
-  has_many :work_hours, through: :shifts, source: :period
-  has_many :unavailable_periods
-  has_many :recesses, through: :unavailable_periods, source: :period
+  has_many :periods, through: :shifts
 
   validates :family_name do
     presence
