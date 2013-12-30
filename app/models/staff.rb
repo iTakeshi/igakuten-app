@@ -50,6 +50,15 @@ class Staff < ActiveRecord::Base
     EmailVerificator.verification(self).deliver if self.email_changed?
   end
 
+  after_create do
+    team_recess = Team.where(name: '休憩').first
+    if team_recess
+      self.teams << team_recess
+    else
+      puts 'WARNING: Team "休憩"が登録されていません'
+    end
+  end
+
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
   scope :with_teams, -> { includes(:teams) }
 

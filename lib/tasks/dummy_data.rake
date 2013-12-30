@@ -49,7 +49,7 @@ namespace :dummy do
   task :staffs_teams => :environment do
     Staff.all.each do |staff|
       prob = (Random.rand(5) + 1).to_f / 15
-      Team.all.each do |team|
+      Team.where.not(name: '休憩').each do |team|
         staff.teams << team if Random.rand < prob
       end
     end
