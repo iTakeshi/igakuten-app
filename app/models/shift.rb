@@ -13,4 +13,5 @@ class Shift < ActiveRecord::Base
   validates :staff_id do
     presence
   end
+  validates_with StaffMustParticipatesInTheTeamValidator
 end
