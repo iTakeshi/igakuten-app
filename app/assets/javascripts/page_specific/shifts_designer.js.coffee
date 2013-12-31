@@ -1,8 +1,10 @@
 $ ->
     class ShiftDesignerModel
-        constructor: (staffs, periods) ->
+        constructor: (staffs, periods, teams) ->
             @staffs  = ko.observableArray(staffs)
             @periods = ko.observableArray(periods)
+            @teams   = ko.observableArray(teams)
+            @selectedTeam = ko.observable()
 
     class Staff
         constructor: (id, grade, gender, name, shifts) ->
@@ -70,5 +72,5 @@ $ ->
             teams = data
     Staff.teams = teams
 
-    shiftDesignerModel = new ShiftDesignerModel(staffs, periods)
+    shiftDesignerModel = new ShiftDesignerModel(staffs, periods, teams)
     ko.applyBindings shiftDesignerModel

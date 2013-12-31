@@ -22,3 +22,7 @@
     </tr>
   </tbody>
 </table>
+
+<ul data-bind="foreach: { data: teams, as: 'team' }">
+  <li data-bind="text: team.name, click: $parent.selectedTeam.bind(team)"></li>
+</ul>
