@@ -15,6 +15,14 @@ class ShiftsController < ApplicationController
     end
   end
 
+  # DELETE /shifts/1.json
+  def destroy
+    shift = Shift.find params[:id]
+
+    shift.destroy!
+    render json: { status: :success }
+  end
+
   # GET /shifts/designer
   def designer
   end

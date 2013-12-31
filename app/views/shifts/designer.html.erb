@@ -18,7 +18,10 @@
       <th data-bind="text: name"></th>
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
         <!-- ko if: staff.teamWorkingWith(period) -->
-          <td data-bind="text: staff.teamWorkingWith(period)"></td>
+          <td>
+            <span data-bind="text: staff.teamWorkingWith(period)"></span>
+            <button data-bind="click: function(data, event) { staff.destroyShift(period) }">取消</button>
+          </td>
         <!-- /ko -->
         <!-- ko ifnot: staff.teamWorkingWith(period) -->
           <td data-bind="click: function(data, event) { $root.createShift(staff, period, data, event) }"></td>

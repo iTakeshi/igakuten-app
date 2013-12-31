@@ -46,6 +46,16 @@ $ ->
                     console.log 'Error: conflicting shifts'
                     ""
 
+        destroyShift: (period) ->
+            shift = $.grep @shifts(), (shift) ->
+                if period.id == shift.period_id() then true else false
+            return false unless shift[0]
+            $.ajax "/shifts/#{shift[0].id()}",
+                type: 'DELETE',
+                dataType: 'json',
+                success: (data) =>
+                    @shifts.splice(@shifts.indexOf(shift[0]), 1)
+
     class Shift
         constructor: (id, period_id, team_id, staff_id) ->
             @id        = ko.observable(id)
