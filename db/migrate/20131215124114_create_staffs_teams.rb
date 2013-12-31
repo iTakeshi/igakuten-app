@@ -1,8 +1,8 @@
 class CreateStaffsTeams < ActiveRecord::Migration
   def change
-    create_table :staffs_teams do |t|
-      t.references :staff, index: true
-      t.references :team,  index: true
+    create_join_table :staffs, :teams do |t|
+      t.index :staff_id
+      t.index :team_id
     end
   end
 end
