@@ -13,7 +13,7 @@ $ ->
                         staff.id()
                     $.ajax '/shifts',
                         type: 'POST',
-                        data: { "shift": ko.toJS(shift) }
+                        data: { "shift": ko.toJS(shift) },
                         dataType: 'json',
                         success: (data) =>
                             staff.shifts.push(shift)
