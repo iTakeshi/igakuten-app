@@ -8,7 +8,8 @@ $ ->
 
             @createShift = (staff, period) =>
                 if @selectedTeam()
-                    shift = new Shift period.id,
+                    shift = new Shift null,
+                        period.id,
                         @selectedTeam().id
                         staff.id()
                     $.ajax '/shifts',
@@ -16,6 +17,7 @@ $ ->
                         data: { "shift": ko.toJS(shift) },
                         dataType: 'json',
                         success: (data) =>
+                            shift.id(data.shift.id)
                             staff.shifts.push(shift)
                         error: (data) =>
                             console.log JSON.stringify data.responseJSON.errors
@@ -45,7 +47,8 @@ $ ->
                     ""
 
     class Shift
-        constructor: (period_id, team_id, staff_id) ->
+        constructor: (id, period_id, team_id, staff_id) ->
+            @id        = ko.observable(id)
             @period_id = ko.observable(period_id)
             @team_id   = ko.observable(team_id)
             @staff_id  = ko.observable(staff_id)
@@ -56,7 +59,8 @@ $ ->
         dataType: 'json',
         success: (data) ->
             shifts = $.map data, (shift) ->
-                new Shift shift.period_id,
+                new Shift shift.id,
+                    shift.period_id,
                     shift.team_id,
                     shift.staff_id
 

@@ -9,7 +9,7 @@ class ShiftsController < ApplicationController
     shift = Shift.new shift_params
 
     if shift.save
-      render json: { status: :success }
+      render json: { status: :success, shift: shift }
     else
       render json: { status: :error, errors: shift.errors }, status: :unprocessable_entity
     end
