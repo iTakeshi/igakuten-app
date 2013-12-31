@@ -4,7 +4,23 @@ class ShiftsController < ApplicationController
     @shifts = Shift.all
   end
 
+  # POST /shifts.json
+  def create
+    shift = Shift.new shift_params
+
+    if shift.save
+      render json: { status: :success }
+    else
+      render json: { status: :error, errors: shift.errors }, status: :unprocessable_entity
+    end
+  end
+
   # GET /shifts/designer
   def designer
+  end
+
+  private
+  def shift_params
+    params.require(:shift).permit([:period_id, :team_id, :staff_id])
   end
 end

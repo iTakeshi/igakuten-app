@@ -6,6 +6,22 @@ $ ->
             @teams   = ko.observableArray(teams)
             @selectedTeam = ko.observable()
 
+            @createShift = (staff, period) =>
+                if @selectedTeam()
+                    shift = new Shift period.id,
+                        @selectedTeam().id
+                        staff.id()
+                    $.ajax '/shifts',
+                        type: 'POST',
+                        data: { "shift": ko.toJS(shift) }
+                        dataType: 'json',
+                        success: (data) =>
+                            staff.shifts.push(shift)
+                        error: (data) =>
+                            console.log JSON.stringify data.responseJSON.errors
+                else
+                    return false
+
     class Staff
         constructor: (id, grade, gender, name, shifts) ->
             @id     = ko.observable(id)
