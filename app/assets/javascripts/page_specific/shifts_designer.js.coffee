@@ -19,7 +19,7 @@ $ ->
                 when 0
                     ""
                 when 1
-                    team = $.grep window.teams, (team) ->
+                    team = $.grep Staff.teams, (team) ->
                         if shift[0].team_id() == team.id then true else false
                     team[0].name
                 else
@@ -62,12 +62,13 @@ $ ->
         success: (data) ->
             periods = data
 
-    window.teams = []
+    teams = []
     $.ajax '/teams.json',
         async: false,
         dataType: 'json',
         success: (data) ->
-            window.teams = data
+            teams = data
+    Staff.teams = teams
 
     shiftDesignerModel = new ShiftDesignerModel(staffs, periods)
     ko.applyBindings shiftDesignerModel
