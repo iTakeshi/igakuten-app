@@ -45,8 +45,8 @@ namespace :dummy do
     end
   end
 
-  desc 'create dummy staffs-teams association'
-  task :staffs_teams => :environment do
+  desc 'create dummy participations'
+  task :participations => :environment do
     Staff.all.each do |staff|
       prob = (Random.rand(5) + 1).to_f / 15
       Team.where.not(name: '休憩').each do |team|
@@ -91,7 +91,7 @@ namespace :dummy do
     Rake::Task['dummy:staffs'].invoke
     Rake::Task['dummy:sections'].invoke
     Rake::Task['dummy:teams'].invoke
-    Rake::Task['dummy:staffs_teams'].invoke
+    Rake::Task['dummy:participations'].invoke
     Rake::Task['dummy:festival_dates'].invoke
     Rake::Task['dummy:periods'].invoke
     Rake::Task['dummy:quorums'].invoke
