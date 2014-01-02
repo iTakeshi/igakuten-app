@@ -102,15 +102,6 @@ ActiveRecord::Schema.define(version: 20140102065333) do
   add_index "staffs", ["email_verification_code"], name: "index_staffs_on_email_verification_code", unique: true
   add_index "staffs", ["phone"], name: "index_staffs_on_phone", unique: true
 
-  create_table "staffs_teams", id: false, force: true do |t|
-    t.integer "staff_id", null: false
-    t.integer "team_id",  null: false
-  end
-
-  add_index "staffs_teams", ["staff_id", "team_id"], name: "index_staffs_teams_on_staff_id_and_team_id", unique: true
-  add_index "staffs_teams", ["staff_id"], name: "index_staffs_teams_on_staff_id"
-  add_index "staffs_teams", ["team_id"], name: "index_staffs_teams_on_team_id"
-
   create_table "teams", force: true do |t|
     t.integer  "section_id",    null: false
     t.string   "name",          null: false
