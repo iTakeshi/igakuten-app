@@ -5,7 +5,6 @@ $ ->
             @teams = ko.observableArray(teams)
 
     class Staff
-
         constructor: (id, grade, gender, name, teams) ->
             @id     = ko.observable(id)
             @grade  = ko.observable(grade)
