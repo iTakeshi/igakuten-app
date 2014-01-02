@@ -12,7 +12,7 @@ $ ->
             @name   = ko.observable(name)
             @teams  = ko.observableArray(teams)
 
-        participate_in: (team_id) ->
+        participateIn: (team_id) ->
             if @teams.indexOf(team_id) == -1 then false else true
 
         participate: (team) =>
