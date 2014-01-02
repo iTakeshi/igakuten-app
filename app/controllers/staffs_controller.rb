@@ -11,10 +11,6 @@ class StaffsController < ApplicationController
     @staff.verificate_with(params[:verification_code])
   end
 
-  # GET /staffs/teams
-  def teams
-  end
-
   # POST /staffs/1/participate/:team_id.json
   def participate
     @staff.teams << Team.find(params[:team_id])

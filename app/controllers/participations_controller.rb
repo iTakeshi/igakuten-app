@@ -3,4 +3,8 @@ class ParticipationsController < ApplicationController
   def index
     @participations = Participation.all
   end
+
+  # GET /participations/manager
+  def manager
+  end
 end
