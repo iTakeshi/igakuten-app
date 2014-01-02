@@ -1,5 +1,5 @@
 $ ->
-    class ShiftDesignerModel
+    class ViewModel
         constructor: (staffs, periods, teams) ->
             @staffs  = ko.observableArray(staffs)
             @periods = ko.observableArray(periods)
@@ -25,26 +25,22 @@ $ ->
                     return false
 
     class Staff
-        constructor: (id, grade, gender, name, shifts) ->
+        constructor: (id, grade, gender, name, participations, shifts) ->
             @id     = ko.observable(id)
             @grade  = ko.observable(grade)
             @gender = ko.observable(gender)
             @name   = ko.observable(name)
-            @shifts = ko.observableArray(shifts)
+            @participations = ko.observableArray(participations)
+            @shifts         = ko.observableArray(shifts)
 
         teamWorkingWith: (period) ->
-            shift = $.grep @shifts(), (shift) ->
-                if period.id == shift.period_id() then true else false
-            switch shift.length
-                when 0
-                    ""
-                when 1
-                    team = $.grep Staff.teams, (team) ->
-                        if shift[0].team_id() == team.id then true else false
-                    team[0].name
-                else
-                    console.log 'Error: conflicting shifts'
-                    ""
+            shift = $.grep(@shifts(), (shift) ->
+                if period.id == shift.period.id then true else false
+            )[0]
+            if shift
+                shift.participation.team.name
+            else
+                false
 
         destroyShift: (period) ->
             shift = $.grep @shifts(), (shift) ->
@@ -56,36 +52,17 @@ $ ->
                 success: (data) =>
                     @shifts.splice(@shifts.indexOf(shift[0]), 1)
 
+    class Participation
+        constructor: (id, team, staff_id) ->
+            @id       = id
+            @team     = team
+            @staff_id = staff_id
+
     class Shift
-        constructor: (id, period_id, team_id, staff_id) ->
-            @id        = ko.observable(id)
-            @period_id = ko.observable(period_id)
-            @team_id   = ko.observable(team_id)
-            @staff_id  = ko.observable(staff_id)
-
-    shifts = []
-    $.ajax '/shifts.json',
-        async: false,
-        dataType: 'json',
-        success: (data) ->
-            shifts = $.map data, (shift) ->
-                new Shift shift.id,
-                    shift.period_id,
-                    shift.team_id,
-                    shift.staff_id
-
-    staffs = []
-    $.ajax '/staffs.json',
-        async: false,
-        dataType: 'json',
-        success: (data) ->
-            staffs = $.map data, (staff) ->
-                new Staff staff.id,
-                    staff.grade,
-                    staff.gender_to_s,
-                    staff.full_name,
-                    $.grep shifts, (shift) ->
-                        if staff.id == shift.staff_id() then true else false
+        constructor: (id, participation, period) ->
+            @id            = id
+            @participation = participation
+            @period        = period
 
     periods = []
     $.ajax '/periods.json',
@@ -100,7 +77,47 @@ $ ->
         dataType: 'json',
         success: (data) ->
             teams = data
-    Staff.teams = teams
 
-    shiftDesignerModel = new ShiftDesignerModel(staffs, periods, teams)
-    ko.applyBindings shiftDesignerModel
+    participations = []
+    $.ajax '/participations.json',
+        async: false,
+        dataType: 'json',
+        success: (data) ->
+            participations = $.map data, (participation) ->
+                new Participation participation.id,
+                    $.grep(teams, (team) ->
+                        if participation.team_id == team.id then true else false
+                    )[0],
+                    participation.staff_id
+
+    shifts = []
+    $.ajax '/shifts.json',
+        async: false,
+        dataType: 'json',
+        success: (data) ->
+            shifts = $.map data, (shift) ->
+                new Shift shift.id,
+                    $.grep(participations, (participation) ->
+                        if shift.participation_id == participation.id then true else false
+                    )[0],
+                    $.grep(periods, (period) ->
+                        if shift.period_id == period.id then true else false
+                    )[0]
+
+    staffs = []
+    $.ajax '/staffs.json',
+        async: false,
+        dataType: 'json',
+        success: (data) ->
+            staffs = $.map data, (staff) ->
+                new Staff staff.id,
+                    staff.grade,
+                    staff.gender_to_s,
+                    staff.full_name,
+                    $.grep participations, (participation) ->
+                        if staff.id == participation.staff_id then true else false
+                    $.grep shifts, (shift) ->
+                        if staff.id == shift.participation.staff_id then true else false
+
+    vm = new ViewModel(staffs, periods, teams)
+    ko.applyBindings vm
