@@ -10,7 +10,9 @@ ActiveAdmin.register Staff do
     column :gender_to_s
     column :phone
     column :email
-    column 'メールアドレス確認', :email_verificated_to_s
+    column 'メールアドレス確認' do |staff|
+      "未確認：#{link_to '確認メール再送', send_verification_admin_staff_path(staff)}".html_safe unless staff.email_verificated
+    end
     column '仮登録' do |staff|
       "仮：#{link_to '本登録する', register_admin_staff_path(staff)}".html_safe if staff.provisional
     end
@@ -26,7 +28,7 @@ ActiveAdmin.register Staff do
       row :phone
       row :email
       row 'メールアドレス確認' do |staff|
-        staff.email_verificated_to_s
+        "未確認：#{link_to '確認メール再送', send_verification_admin_staff_path(staff)}".html_safe unless staff.email_verificated
       end
       row '仮登録' do |staff|
         "仮：#{link_to '本登録する', register_admin_staff_path(staff)}".html_safe if staff.provisional
@@ -53,5 +55,11 @@ ActiveAdmin.register Staff do
     staff = Staff.find(params[:id])
     staff.register
     redirect_to({ action: :index }, { notice: "#{staff.full_name}さんを本登録しました。" })
+  end
+
+  member_action :send_verification, method: :get do
+    staff = Staff.find(params[:id])
+    staff.send_verification
+    redirect_to({ action: :index }, { notice: "#{staff.full_name}さんに確認メールを再送しました。" })
   end
 end

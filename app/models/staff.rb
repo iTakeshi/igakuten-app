@@ -47,9 +47,7 @@ class Staff < ActiveRecord::Base
     set_verification_code if self.email_changed?
   end
 
-  after_save do
-    EmailVerificator.verification(self).deliver if self.email_changed?
-  end
+  after_save :send_verification, if: 'self.email_changed?'
 
   after_create do
     team_recess = Team.where(name: '休憩').first
@@ -79,10 +77,6 @@ class Staff < ActiveRecord::Base
     end
   end
 
-  def email_verificated_to_s
-    self.email_verificated ? '' : '未確認'
-  end
-
   def verificate(verification_code)
     if verification_code == self.email_verification_code
       self.email_verificated = true
@@ -94,6 +88,10 @@ class Staff < ActiveRecord::Base
   def register
     self.provisional = false
     self.save!
+  end
+
+  def send_verification
+    EmailVerificator.verification(self).deliver
   end
 
   private
