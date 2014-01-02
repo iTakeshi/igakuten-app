@@ -1,19 +1,21 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :shifts,   only: %i(index create destroy) do
+  resources :participations, only: :index
+
+  resources :shifts,         only: %i(index create destroy) do
     collection do
       get 'designer'
     end
   end
 
-  resources :periods,  only: :index
+  resources :periods,        only: :index
 
-  resources :teams,    only: :index
+  resources :teams,          only: :index
 
-  resources :sections, only: :index
+  resources :sections,       only: :index
 
-  resources :staffs,   only: :index do
+  resources :staffs,         only: :index do
     collection do
       get 'teams'
     end
