@@ -18,21 +18,26 @@ $ ->
         participateIn: (team) ->
             if @teamIds().indexOf(team.id) == -1 then false else true
 
-        participate: (team) =>
-            $.ajax "/staffs/#{@id()}/participate/#{team.id}.json",
-                dataType: 'json',
+        participate: (team) ->
+            participation = { team_id: team.id, staff_id: @id() }
+            $.ajax "/participations",
                 type: 'POST',
-                success: =>
-                    @teamIds.push(team.id)
-
-        unparticipate: (team) =>
-            $.ajax "/staffs/#{@id()}/unparticipate/#{team.id}.json",
+                data: { "participation": participation },
                 dataType: 'json',
-                type: 'POST',
-                success: =>
-                    @teamIds.splice(@teamIds.indexOf(team.id), 1)
+                success: (data) =>
+                    @participations.push(data.participation)
 
-        toggle: (team) =>
+        unparticipate: (team) ->
+            p = $.grep(@participations(), (participation) =>
+                if team.id == participation.team_id then true else false
+            )[0]
+            $.ajax "/participations/#{p.id}",
+                type: 'DELETE',
+                dataType: 'json',
+                success: =>
+                    @participations.splice(@participations.indexOf(p), 1)
+
+        toggle: (team) ->
             if @participateIn(team)
                 @unparticipate(team)
             else
