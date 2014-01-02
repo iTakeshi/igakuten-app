@@ -43,20 +43,11 @@ class Staff < ActiveRecord::Base
     uniqueness
   end
 
-  before_validation do
-    set_verification_code if self.email_changed?
-  end
+  before_validation :set_verification_code, if: 'self.email_changed?'
 
   after_save :send_verification, if: 'self.email_changed?'
 
-  after_create do
-    team_recess = Team.where(name: '休憩').first
-    if team_recess
-      self.teams << team_recess
-    else
-      puts 'WARNING: Team "休憩"が登録されていません'
-    end
-  end
+  after_create :participate_in_team_recess
 
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
 
@@ -101,5 +92,14 @@ class Staff < ActiveRecord::Base
       code = SecureRandom.hex(10)
     end while Staff.exists?(email_verification_code: code)
     self.email_verification_code = code
+  end
+
+  def participate_in_team_recess
+    team_recess = Team.where(name: '休憩').first
+    if team_recess
+      self.teams << team_recess
+    else
+      puts 'WARNING: Team "休憩"が登録されていません'
+    end
   end
 end
