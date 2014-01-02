@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223014202) do
+ActiveRecord::Schema.define(version: 20140102065333) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20131223014202) do
 
   add_index "festival_dates", ["date"], name: "index_festival_dates_on_date", unique: true
   add_index "festival_dates", ["day"], name: "index_festival_dates_on_day", unique: true
+
+  create_table "participations", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "staff_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participations", ["staff_id"], name: "index_participations_on_staff_id"
+  add_index "participations", ["team_id", "staff_id"], name: "index_participations_on_team_id_and_staff_id", unique: true
+  add_index "participations", ["team_id"], name: "index_participations_on_team_id"
 
   create_table "periods", force: true do |t|
     t.integer  "festival_date_id"

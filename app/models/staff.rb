@@ -1,5 +1,6 @@
 class Staff < ActiveRecord::Base
-  has_and_belongs_to_many :teams
+  has_many :participations
+  has_many :teams, through: :participations
   has_many :shifts
   has_many :periods, through: :shifts
 
