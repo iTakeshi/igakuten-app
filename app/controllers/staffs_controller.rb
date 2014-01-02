@@ -11,18 +11,6 @@ class StaffsController < ApplicationController
     @staff.verificate_with(params[:verification_code])
   end
 
-  # POST /staffs/1/participate/:team_id.json
-  def participate
-    @staff.teams << Team.find(params[:team_id])
-    render json: { status: :success }
-  end
-
-  # POST /staffs/1/unparticipate/:team_id.json
-  def unparticipate
-    @staff.teams.destroy Team.find(params[:team_id])
-    render json: { status: :success }
-  end
-
   private
   def set_staff
     @staff = Staff.find(params[:id])

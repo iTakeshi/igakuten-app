@@ -1,7 +1,7 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :participations, only: :index do
+  resources :participations, only: %i(index create destroy) do
     collection do
       get 'manager'
     end
@@ -22,8 +22,6 @@ IgakutenApp::Application.routes.draw do
   resources :staffs,         only: :index do
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
-      post 'participate/:team_id', action: :participate
-      post 'unparticipate/:team_id', action: :unparticipate
     end
   end
 
