@@ -5,15 +5,18 @@ $ ->
             @staffs = ko.observableArray(staffs)
 
     class Staff
-        constructor: (id, grade, gender, name, teamIds) ->
+        constructor: (id, grade, gender, name, participations) ->
             @id      = ko.observable(id)
             @grade   = ko.observable(grade)
             @gender  = ko.observable(gender)
             @name    = ko.observable(name)
-            @teamIds = ko.observableArray(teamIds)
+            @participations = ko.observableArray(participations)
+            @teamIds = ko.computed =>
+                $.map @participations(), (participation) ->
+                    participation.team_id
 
         participateIn: (team) ->
-            if @teamIds.indexOf(team.id) == -1 then false else true
+            if @teamIds().indexOf(team.id) == -1 then false else true
 
         participate: (team) =>
             $.ajax "/staffs/#{@id()}/participate/#{team.id}.json",
@@ -49,21 +52,18 @@ $ ->
         success: (data) ->
             participations = data
 
-    console.log participations
     staffs = []
     $.ajax '/staffs.json',
         async: false,
         dataType: 'json',
         success: (data) ->
             staffs = $.map data, (staff) ->
-                myParticipations = $.grep participations, (participation) ->
-                    if staff.id == participation.staff_id then true else false
                 new Staff staff.id,
                     staff.grade,
                     staff.gender_to_s,
                     staff.full_name,
-                    $.map myParticipations, (participation) ->
-                        participation.team_id
+                    $.grep participations, (participation) ->
+                        if staff.id == participation.staff_id then true else false
 
     vm = new ViewModel(teams, staffs)
     ko.applyBindings vm
