@@ -8,7 +8,7 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/verificate/:verification_code
   def verificate
-    @staff.verificate_with(params[:verification_code])
+    @staff.verificate(params[:verification_code])
   end
 
   private

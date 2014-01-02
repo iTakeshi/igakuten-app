@@ -13,7 +13,7 @@ namespace :dummy do
                    provisional: num.to_i <= 10 ? true : false
     end
     Staff.where(given_name: '03'..'30').each do |staff|
-      staff.verificate_with(staff.email_verification_code)
+      staff.verificate(staff.email_verification_code)
     end
   end
 
