@@ -17,10 +17,10 @@
       <td data-bind="text: gender"></td>
       <th data-bind="text: name"></th>
       <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
-        <!-- ko if: staff.participateIn(team.id) -->
+        <!-- ko if: staff.participateIn(team) -->
           <td><button data-bind="click: staff.unparticipate.bind(team)">参加済み</button></td>
         <!-- /ko -->
-        <!-- ko ifnot: staff.participateIn(team.id) -->
+        <!-- ko ifnot: staff.participateIn(team) -->
           <td><button data-bind="click: staff.participate.bind(team)">参加する</button></td>
         <!-- /ko -->
       <!-- /ko -->
