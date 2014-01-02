@@ -13,7 +13,7 @@ $ ->
             @teams  = ko.observableArray(teams)
 
         participateIn: (team) ->
-            if @teams.indexOf(team.id) == -1 then false else true
+            if @teams.indexOf(team.id) == -1 then false else 'participated'
 
         participate: (team) =>
             $.ajax "/staffs/#{@id()}/participate/#{team.id}.json",
@@ -28,6 +28,12 @@ $ ->
                 type: 'POST',
                 success: =>
                     @teams.splice(@teams.indexOf(team.id), 1)
+
+        toggle: (team) =>
+            if @participateIn(team)
+                @unparticipate(team)
+            else
+                @participate(team)
 
     staffs = []
     $.ajax '/staffs.json',
