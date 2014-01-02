@@ -13,7 +13,7 @@ $ ->
             @teams  = ko.observableArray(teams)
 
         participateIn: (team) ->
-            if @teams.indexOf(team.id) == -1 then false else 'participated'
+            if @teams.indexOf(team.id) == -1 then false else true
 
         participate: (team) =>
             $.ajax "/staffs/#{@id()}/participate/#{team.id}.json",

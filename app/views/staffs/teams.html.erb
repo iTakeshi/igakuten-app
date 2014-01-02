@@ -17,14 +17,14 @@
       <td data-bind="text: gender"></td>
       <th data-bind="text: name"></th>
       <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
-        <td data-bind="click: function(data, event) { staff.toggle(team, data, event) }, css: staff.participateIn(team)"></td>
+        <td>
+          <div class="switch" data-bind="click: function(data, event) { staff.toggle(team, data, event) }">
+            <span class="switch-input" data-bind="css: { checked: staff.participateIn(team) }"></span>
+            <span class="switch-label" data-on="参加" data-off="不参加"></span>
+            <span class="switch-handle"></span>
+          </div>
+        </td>
       <!-- /ko -->
     </tr>
   </tbody>
 </table>
-
-<style type="text/css">
-  .participated {
-    background: red;
-  }
-</style>
