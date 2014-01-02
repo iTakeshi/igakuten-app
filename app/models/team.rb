@@ -2,8 +2,8 @@ class Team < ActiveRecord::Base
   belongs_to :section
   has_many :participations
   has_many :staffs, through: :participations
+  has_many :shifts, through: :participations
   has_many :quorums
-  has_many :shifts
 
   validates :name do
     presence

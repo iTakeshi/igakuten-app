@@ -1,7 +1,7 @@
 class Staff < ActiveRecord::Base
   has_many :participations
   has_many :teams, through: :participations
-  has_many :shifts
+  has_many :shifts, through: :participations
   has_many :periods, through: :shifts
 
   validates :family_name do

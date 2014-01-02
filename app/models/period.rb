@@ -2,7 +2,8 @@ class Period < ActiveRecord::Base
   belongs_to :festival_date
   has_many :quorums
   has_many :shifts
-  has_many :staffs, through: :shifts
+  has_many :participations, through: :shifts
+  has_many :staffs, through: :participations
 
   validates :begins_at do
     presence

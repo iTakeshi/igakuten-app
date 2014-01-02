@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102065333) do
+ActiveRecord::Schema.define(version: 20140102071423) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -70,16 +70,14 @@ ActiveRecord::Schema.define(version: 20140102065333) do
 
   create_table "shifts", force: true do |t|
     t.integer  "period_id"
-    t.integer  "team_id"
-    t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "participation_id"
   end
 
-  add_index "shifts", ["period_id", "staff_id"], name: "index_shifts_on_period_id_and_staff_id", unique: true
+  add_index "shifts", ["participation_id", "period_id"], name: "index_shifts_on_participation_id_and_period_id", unique: true
+  add_index "shifts", ["participation_id"], name: "index_shifts_on_participation_id"
   add_index "shifts", ["period_id"], name: "index_shifts_on_period_id"
-  add_index "shifts", ["staff_id"], name: "index_shifts_on_staff_id"
-  add_index "shifts", ["team_id"], name: "index_shifts_on_team_id"
 
   create_table "staffs", force: true do |t|
     t.string   "family_name",                             null: false
