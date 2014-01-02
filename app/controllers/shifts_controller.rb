@@ -23,8 +23,8 @@ class ShiftsController < ApplicationController
     render json: { status: :success }
   end
 
-  # GET /shifts/designer
-  def designer
+  # GET /shifts/manager
+  def manager
   end
 
   private

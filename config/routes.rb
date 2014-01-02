@@ -9,7 +9,7 @@ IgakutenApp::Application.routes.draw do
 
   resources :shifts,         only: %i(index create destroy) do
     collection do
-      get 'designer'
+      get 'manager'
     end
   end
 
