@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
 
   # GET /staffs.json
   def index
-    @staffs = Staff.ordered.with_teams
+    @staffs = Staff.ordered
   end
 
   # GET /staffs/1/verificate/:verification_code
