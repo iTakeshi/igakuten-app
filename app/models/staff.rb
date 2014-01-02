@@ -97,7 +97,6 @@ class Staff < ActiveRecord::Base
   end
 
   private
-
   def set_verification_code
     self.email_verificated = false
     begin
