@@ -6,24 +6,6 @@ $ ->
             @teams   = ko.observableArray(teams)
             @selectedTeam = ko.observable()
 
-            @createShift = (staff, period) =>
-                if @selectedTeam()
-                    shift = new Shift null,
-                        period.id,
-                        @selectedTeam().id
-                        staff.id()
-                    $.ajax '/shifts',
-                        type: 'POST',
-                        data: { "shift": ko.toJS(shift) },
-                        dataType: 'json',
-                        success: (data) =>
-                            shift.id(data.shift.id)
-                            staff.shifts.push(shift)
-                        error: (data) =>
-                            console.log JSON.stringify data.responseJSON.errors
-                else
-                    return false
-
     class Staff
         constructor: (id, grade, gender, name, participations, shifts) ->
             @id     = ko.observable(id)
@@ -42,15 +24,37 @@ $ ->
             else
                 false
 
+        createShift: (period, team) ->
+            if team
+                participation = $.grep(@participations(), (participation) ->
+                    if team.id == participation.team.id then true else false
+                )[0]
+                unless participation
+                    console.log 'A staff can NOT work with the team he/she doesn\'t participate in'
+                    return false
+                shift = new Shift null,
+                    participation,
+                    period
+                $.ajax '/shifts',
+                    type: 'POST',
+                    data: { "shift": shift.toParams() },
+                    dataType: 'json',
+                    success: (data) =>
+                        shift.id = data.shift.id
+                        @shifts.push(shift)
+            else
+                return false
+
         destroyShift: (period) ->
-            shift = $.grep @shifts(), (shift) ->
-                if period.id == shift.period_id() then true else false
-            return false unless shift[0]
-            $.ajax "/shifts/#{shift[0].id()}",
+            shift = $.grep(@shifts(), (shift) ->
+                if period.id == shift.period.id then true else false
+            )[0]
+            return false unless shift
+            $.ajax "/shifts/#{shift.id}",
                 type: 'DELETE',
                 dataType: 'json',
                 success: (data) =>
-                    @shifts.splice(@shifts.indexOf(shift[0]), 1)
+                    @shifts.splice(@shifts.indexOf(shift), 1)
 
     class Participation
         constructor: (id, team, staff_id) ->
@@ -63,6 +67,12 @@ $ ->
             @id            = id
             @participation = participation
             @period        = period
+
+        toParams: ->
+            {
+                participation_id: @participation.id,
+                period_id: @period.id
+            }
 
     periods = []
     $.ajax '/periods.json',
