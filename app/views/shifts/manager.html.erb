@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'page_specific/shifts_designer' %>
+<%= javascript_include_tag 'page_specific/shifts_manager' %>
 
 <table>
   <thead>
@@ -24,7 +24,7 @@
           </td>
         <!-- /ko -->
         <!-- ko ifnot: staff.teamWorkingWith(period) -->
-          <td data-bind="click: function(data, event) { $root.createShift(staff, period, data, event) }"></td>
+          <td data-bind="click: function(data, event) { staff.createShift(period, $root.selectedTeam(), data, event) }"></td>
         <!-- /ko -->
       <!-- /ko -->
     </tr>

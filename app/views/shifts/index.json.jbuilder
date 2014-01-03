@@ -1,3 +1,3 @@
 json.array!(@shifts) do |shift|
-  json.extract! shift, :id, :period_id, :team_id, :staff_id
+  json.extract! shift, :id, :participation_id, :period_id
 end
