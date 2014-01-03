@@ -1,7 +1,7 @@
 class Participation < ActiveRecord::Base
   belongs_to :team
   belongs_to :staff
-  has_many :shifts
+  has_many :shifts, dependent: :destroy
   has_many :periods, through: :shifts
 
   validates :team_id do
