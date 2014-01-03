@@ -29,6 +29,6 @@ class ShiftsController < ApplicationController
 
   private
   def shift_params
-    params.require(:shift).permit([:period_id, :team_id, :staff_id])
+    params.require(:shift).permit [:participation_id, :period_id]
   end
 end
