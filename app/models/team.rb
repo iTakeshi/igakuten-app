@@ -1,9 +1,9 @@
 class Team < ActiveRecord::Base
   belongs_to :section
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :staffs, through: :participations
   has_many :shifts, through: :participations
-  has_many :quorums
+  has_many :quorums, dependent: :destroy
 
   validates :name do
     presence

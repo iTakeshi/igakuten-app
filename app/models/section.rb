@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  has_many :teams
+  has_many :teams, dependent: :destroy
 
   validates :name do
     presence

@@ -1,5 +1,5 @@
 class FestivalDate < ActiveRecord::Base
-  has_many :periods
+  has_many :periods, dependent: :destroy
 
   validates :day do
     presence
