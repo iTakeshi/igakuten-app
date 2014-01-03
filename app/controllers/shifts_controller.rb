@@ -23,10 +23,6 @@ class ShiftsController < ApplicationController
     render json: { status: :success }
   end
 
-  # GET /shifts/manager
-  def manager
-  end
-
   private
   def shift_params
     params.require(:shift).permit [:participation_id, :period_id]

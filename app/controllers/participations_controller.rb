@@ -23,10 +23,6 @@ class ParticipationsController < ApplicationController
     render json: { status: :success }
   end
 
-  # GET /participations/manager
-  def manager
-  end
-
   private
   def participation_params
     params.require(:participation).permit [:team_id, :staff_id]
