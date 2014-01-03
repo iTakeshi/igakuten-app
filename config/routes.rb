@@ -5,6 +5,8 @@ IgakutenApp::Application.routes.draw do
 
   resources :shifts,         only: %i(index create destroy)
 
+  resources :quorums,        only: :index
+
   resources :periods,        only: :index
 
   resources :teams,          only: :index
