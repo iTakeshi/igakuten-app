@@ -1,0 +1,28 @@
+.slider {
+  display: block;
+  width: 100px;
+
+  .slider-inner {
+    display: block;
+    width: 40px;
+    height: 7px;
+    border: #000 1px solid;
+    margin: 1px auto;
+    background: #000;
+  }
+
+  output {
+    display: block;
+    text-align: center;
+  }
+}
+
+@for $value from 0 through 10 {
+  .slider[data-value="#{$value}"] {
+    @for $i from 1 through 10 {
+      .slider-inner[data-value="#{$i}"] {
+        @if $value < $i { background: #fff; }
+      }
+    }
+  }
+}
