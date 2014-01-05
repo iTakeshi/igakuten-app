@@ -15,7 +15,6 @@
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
         <td>
           <div class="slider" data-bind="attr: { 'data-value': team.quorum(period) }">
-            <div class="slider-inner" data-value="10" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 10, data, event) }"></div>
             <div class="slider-inner" data-value="9" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 9, data, event) }"></div>
             <div class="slider-inner" data-value="8" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 8, data, event) }"></div>
             <div class="slider-inner" data-value="7" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 7, data, event) }"></div>
@@ -25,6 +24,7 @@
             <div class="slider-inner" data-value="3" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 3, data, event) }"></div>
             <div class="slider-inner" data-value="2" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 2, data, event) }"></div>
             <div class="slider-inner" data-value="1" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 1, data, event) }"></div>
+            <div class="slider-inner" data-value="0" data-bind="click: function(data, event) { $root.updateQuorum(period, team, 0, data, event) }"></div>
             <output data-bind="text: team.quorum(period)"></output>
           </div>
         </td>

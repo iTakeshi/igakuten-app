@@ -9,6 +9,8 @@
     border: #000 1px solid;
     margin: 1px auto;
     background: #000;
+
+    &[data-value="0"] { background: #ccc; }
   }
 
   output {
@@ -17,9 +19,9 @@
   }
 }
 
-@for $value from 0 through 10 {
+@for $value from 0 through 9 {
   .slider[data-value="#{$value}"] {
-    @for $i from 1 through 10 {
+    @for $i from 1 through 9 {
       .slider-inner[data-value="#{$i}"] {
         @if $value < $i { background: #fff; }
       }
