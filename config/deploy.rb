@@ -48,21 +48,21 @@ namespace :deploy do
   desc 'start server'
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
-      execute '/etc/init.d/igakuten_app start'
+      execute '/var/www/igakuten-app/current/init.sh start'
     end
   end
 
   desc 'stop server'
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
-      execute '/etc/init.d/igakuten_app stop'
+      execute '/var/www/igakuten-app/current/init.sh stop'
     end
   end
 
   desc 'restart server'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute '/etc/init.d/igakuten_app restart'
+      execute '/var/www/igakuten-app/current/init.sh restart'
     end
   end
 
