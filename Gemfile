@@ -20,11 +20,11 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Use thin as the app server
+gem 'thin'
 
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+gem 'capistrano-rails', group: :development
 
 # Debug environment
 group :development do

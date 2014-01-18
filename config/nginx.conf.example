@@ -1,0 +1,62 @@
+# copy this file to /etc/nginx/conf.d/igakuten_app.conf
+
+
+# Additional MIME types that you'd like nginx to handle go in here
+types {
+    text/csv                    csv;
+}
+
+upstream app.hokudai-igakuten.org {
+  server localhost:3001;
+}
+
+server {
+
+  listen 80;
+  gzip on;
+  gzip_min_length 1000;
+  gzip_types application/json text/css application/x-javascript;
+
+  server_name app.hokudai-igakuten.org;
+
+  sendfile on;
+
+  keepalive_timeout 65;
+
+  # maximum file upload size (keep up to date when changing the corresponding site setting)
+  client_max_body_size 2m;
+
+  # path to igakuten_app's public directory
+  set $public /var/www/igakuten_app/current/public;
+
+  location / {
+    root $public;
+
+    location ~* \.(eot|ttf|woff)$ {
+	    add_header Access-Control-Allow-Origin *;
+	    expires 1y;
+        add_header Cache-Control public;
+	}
+
+    location ~ ^/assets/ {
+      expires 1y;
+      add_header Cache-Control public;
+      add_header ETag "";
+      break;
+    }
+
+    try_files $uri @app.hokudai-igakuten.org;
+  }
+
+  location @app.hokudai-igakuten.org {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+
+    proxy_set_header X-Forwarded-Proto $thescheme;
+    proxy_set_header Host $http_host;
+
+    proxy_pass http://app.hokudai-igekuten.org;
+  }
+
+}
