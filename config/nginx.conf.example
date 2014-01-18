@@ -24,7 +24,7 @@ server {
   client_max_body_size 2m;
 
   # path to igakuten_app's public directory
-  set $public /var/www/igakuten_app/current/public;
+  set $public /var/www/igakuten-app/current/public;
 
   location / {
     root $public;
