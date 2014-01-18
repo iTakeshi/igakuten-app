@@ -24,7 +24,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'thin'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+gem 'capistrano-rails', group: :development
 
 # Debug environment
 group :development do
