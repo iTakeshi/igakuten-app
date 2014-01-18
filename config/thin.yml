@@ -1,15 +1,12 @@
 ---
-chdir: /var/www/igakuten_app/current
+chdir: /var/www/igakuten-app/current
 environment: production
-address: 0.0.0.0
-port: 3000
+port: 3001
 timeout: 30
-log: /var/www/igakuten_app/shared/log/thin.log
-pid: /var/www/igakuten_app/shared/pids/thin.pid
-socket: /var/www/igakuten_app/tmp/thin.sock
+log: /var/www/igakuten-app/shared/log/thin.log
+pid: /var/www/igakuten-app/shared/pids/thin.pid
 max_conns: 1024
 max_persistent_conns: 100
-require: []
 wait: 30
-servers: 4
+servers: 1
 daemonize: true

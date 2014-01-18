@@ -2,9 +2,6 @@
 
 
 # Additional MIME types that you'd like nginx to handle go in here
-types {
-    text/csv                    csv;
-}
 
 upstream app.hokudai-igakuten.org {
   server localhost:3001;
@@ -56,7 +53,7 @@ server {
     proxy_set_header X-Forwarded-Proto $thescheme;
     proxy_set_header Host $http_host;
 
-    proxy_pass http://app.hokudai-igekuten.org;
+    proxy_pass http://app.hokudai-igakuten.org;
   }
 
 }
