@@ -1,4 +1,6 @@
 ActiveAdmin.register Section do
+  menu priority: 20
+
   scope :ordered, default: true
 
   permit_params %i(name display_order)

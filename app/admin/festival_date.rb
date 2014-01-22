@@ -1,4 +1,6 @@
 ActiveAdmin.register FestivalDate do
+  menu priority: 30
+
   scope :ordered, default: true
 
   permit_params %i(day date)

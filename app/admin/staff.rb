@@ -1,4 +1,6 @@
 ActiveAdmin.register Staff do
+  menu priority: 10
+
   scope :ordered, default: true
 
   permit_params %i(family_name family_name_yomi given_name given_name_yomi grade gender phone email provisional)
