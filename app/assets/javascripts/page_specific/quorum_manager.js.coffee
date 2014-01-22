@@ -10,32 +10,7 @@ $ ->
             )[0]
             q.set(num)
 
-    class Team
-        constructor: (id, name, quorums) ->
-            @id   = id
-            @name = name
-            @quorums = ko.observableArray(quorums)
 
-        quorum: (period) ->
-            q = $.grep(@quorums(), (quorum) ->
-                if period.id == quorum.period.id then true else false
-            )[0]
-            q.quorum
-
-    class Quorum
-        constructor: (id, period, team_id, quorum) ->
-            @id      = id
-            @period  = period
-            @team_id = team_id
-            @quorum = ko.observable(quorum)
-
-        set: (num) ->
-            $.ajax "/quorums/#{@id}",
-                type: 'PUT',
-                data: { "quorum": { "quorum": num } },
-                dataType: 'json',
-                success: (data) =>
-                    @quorum(data.quorum.quorum)
 
     periods = []
     $.ajax '/periods.json',
@@ -50,7 +25,7 @@ $ ->
         dataType: 'json',
         success: (data) ->
             quorums = $.map data, (quorum) ->
-                new Quorum quorum.id,
+                new window.Quorum quorum.id,
                     $.grep(periods, (period) ->
                         if quorum.period_id == period.id then true else false
                     )[0],
@@ -63,7 +38,7 @@ $ ->
         dataType: 'json',
         success: (data) ->
             teams = $.map data, (team) ->
-                new Team team.id,
+                new window.Team team.id,
                     team.name
                     $.grep quorums, (quorum) ->
                         if team.id == quorum.team_id then true else false
