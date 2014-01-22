@@ -19,5 +19,5 @@ IgakutenApp::Application.routes.draw do
     end
   end
 
-  root 'index#index'
+  root to: 'admin/dashboard#index'
 end
