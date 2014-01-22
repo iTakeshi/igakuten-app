@@ -11,7 +11,7 @@
   </thead>
   <tbody data-bind="foreach: { data: teams, as: 'team' }">
     <!-- ko ifnot: team.name == "休憩" -->
-      <tr data-bind="css: { even: $index() % 2 == 1 }">
+      <tr data-bind="css: { even: $index() % 2 == 0 }">
         <td data-bind="text: name"></td>
         <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
           <td>
