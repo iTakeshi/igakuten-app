@@ -6,6 +6,7 @@
       <th>学年</th>
       <th>性別</th>
       <th>氏名</th>
+      <th>チーム数</th>
       <!-- ko foreach: teams -->
         <!-- ko ifnot: name == '休憩' -->
           <th data-bind="text: name"></th>
@@ -18,6 +19,7 @@
       <td data-bind="text: grade"></td>
       <td data-bind="text: gender"></td>
       <td data-bind="text: name"></td>
+      <td data-bind="text: staff.participations().length - 1"></td>
       <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
         <!-- ko ifnot: team.name == '休憩' -->
           <td>
