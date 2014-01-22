@@ -7,7 +7,9 @@
       <th>性別</th>
       <th>氏名</th>
       <!-- ko foreach: teams -->
-        <th data-bind="text: name"></th>
+        <!-- ko ifnot: name == '休憩' -->
+          <th data-bind="text: name"></th>
+        <!-- /ko -->
       <!-- /ko -->
     </tr>
   </thead>
@@ -17,13 +19,15 @@
       <td data-bind="text: gender"></td>
       <td data-bind="text: name"></td>
       <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
-        <td>
-          <div class="switch" data-bind="click: function(data, event) { staff.toggle(team, data, event) }">
-            <span class="switch-input" data-bind="css: { checked: staff.participateIn(team) }"></span>
-            <span class="switch-label" data-on="参加" data-off="不参加"></span>
-            <span class="switch-handle"></span>
-          </div>
-        </td>
+        <!-- ko ifnot: team.name == '休憩' -->
+          <td>
+            <div class="switch" data-bind="click: function(data, event) { staff.toggle(team, data, event) }">
+              <span class="switch-input" data-bind="css: { checked: staff.participateIn(team) }"></span>
+              <span class="switch-label" data-on="参加" data-off="不参加"></span>
+              <span class="switch-handle"></span>
+            </div>
+          </td>
+        <!-- /ko -->
       <!-- /ko -->
     </tr>
   </tbody>
