@@ -4,4 +4,10 @@ class Participation
         @team     = team
         @staff_id = staff_id
 
+    toParams: ->
+        {
+            team_id: @team.id,
+            staff_id: @staff_id
+        }
+
 window.Participation = Participation

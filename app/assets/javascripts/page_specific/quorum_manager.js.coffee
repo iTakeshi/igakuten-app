@@ -10,38 +10,12 @@ $ ->
             )[0]
             q.set(num)
 
-
-
-    periods = []
-    $.ajax '/periods.json',
-        async: false,
-        dataType: 'json',
-        success: (data) ->
-            periods = data
-
-    quorums = []
-    $.ajax '/quorums.json',
-        async: false,
-        dataType: 'json',
-        success: (data) ->
-            quorums = $.map data, (quorum) ->
-                new window.Quorum quorum.id,
-                    $.grep(periods, (period) ->
-                        if quorum.period_id == period.id then true else false
-                    )[0],
-                    quorum.team_id,
-                    quorum.quorum
-
-    teams = []
-    $.ajax '/teams.json',
-        async: false,
-        dataType: 'json',
-        success: (data) ->
-            teams = $.map data, (team) ->
-                new window.Team team.id,
-                    team.name
-                    $.grep quorums, (quorum) ->
-                        if team.id == quorum.team_id then true else false
+    periods        = window.DataLoader.loadPeriods()
+    quorums        = window.DataLoader.loadQuorums(periods)
+    teams          = window.DataLoader.loadTeams(quorums)
+    participations = window.DataLoader.loadParticipations(teams)
+    shifts         = window.DataLoader.loadShifts(participations, periods)
+    staffs         = window.DataLoader.loadStaffs(participations, shifts)
 
     vm = new ViewModel(periods, teams)
     ko.applyBindings(vm)

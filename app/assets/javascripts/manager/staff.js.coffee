@@ -6,25 +6,28 @@ class Staff
         @name   = ko.observable(name)
         @participations = ko.observableArray(participations)
         @shifts         = ko.observableArray(shifts)
-        @teamIds = ko.computed =>
-            $.map @participations(), (participation) ->
-                participation.team_id
 
     participateIn: (team) ->
-        if @teamIds().indexOf(team.id) == -1 then false else true
+        p = $.grep(@participations(), (participation) ->
+            if team.id == participation.team.id then true else false
+        )[0]
+        if p then true else false
 
     participate: (team) ->
-        participation = { team_id: team.id, staff_id: @id() }
+        participation = new Participation null,
+            team,
+            @id()
         $.ajax "/participations",
             type: 'POST',
-            data: { "participation": participation },
+            data: { "participation": participation.toParams() },
             dataType: 'json',
             success: (data) =>
-                @participations.push(data.participation)
+                participation.id = data.participation.id
+                @participations.push(participation)
 
     unparticipate: (team) ->
         p = $.grep(@participations(), (participation) =>
-            if team.id == participation.team_id then true else false
+            if team.id == participation.team.id then true else false
         )[0]
         $.ajax "/participations/#{p.id}",
             type: 'DELETE',
