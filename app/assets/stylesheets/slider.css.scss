@@ -12,6 +12,36 @@
     background: #111;
 
     &[data-value="0"] { background: #ccc; }
+
+    &:hover {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: -10px; left: -35px;
+        z-index: 100;
+        display: block;
+        height: 27px;
+        line-height: 27px;
+        width: 27px;
+        border-radius: 7px;
+        background: #111;
+        content: attr(data-value);
+        text-align: center;
+        color: #fff;
+      }
+
+      &::after {
+        position: absolute;
+        top: -2px; left: -10px;
+        z-index: 90;
+        display: block;
+        border-left:  10px solid #111;
+        border-top:    5px solid transparent;
+        border-bottom: 5px solid transparent;
+        content: ''
+      }
+    }
   }
 
   output {
