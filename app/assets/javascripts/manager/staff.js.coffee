@@ -32,7 +32,7 @@ class Staff
             success: =>
                 @participations.splice(@participations.indexOf(p), 1)
 
-    toggle: (team) ->
+    toggleParticipation: (team) ->
         if @participateIn(team)
             @unparticipate(team)
         else
