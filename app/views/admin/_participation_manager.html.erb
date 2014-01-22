@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'page_specific/participation_manager' %>
 
-<table>
+<table class="index_table">
   <thead>
     <tr>
       <th>学年</th>
@@ -12,10 +12,10 @@
     </tr>
   </thead>
   <tbody data-bind="foreach: { data: staffs, as: 'staff' }">
-    <tr>
+    <tr data-bind="css: { even: $index() % 2 == 1 }">
       <td data-bind="text: grade"></td>
       <td data-bind="text: gender"></td>
-      <th data-bind="text: name"></th>
+      <td data-bind="text: name"></td>
       <!-- ko foreach: { data: $parent.teams, as: 'team' } -->
         <td>
           <div class="switch" data-bind="click: function(data, event) { staff.toggle(team, data, event) }">
