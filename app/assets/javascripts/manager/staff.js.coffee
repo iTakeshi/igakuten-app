@@ -7,11 +7,10 @@ class Staff
         @participations = ko.observableArray(participations)
         @shifts         = ko.observableArray(shifts)
 
-    participateIn: (team) ->
-        p = $.grep(@participations(), (participation) ->
+    findParticipation: (team) ->
+        $.grep(@participations(), (participation) ->
             if team.id == participation.team.id then true else false
         )[0]
-        if p then true else false
 
     participate: (team) ->
         participation = new Participation null,
@@ -26,9 +25,7 @@ class Staff
                 @participations.push(participation)
 
     unparticipate: (team) ->
-        p = $.grep(@participations(), (participation) =>
-            if team.id == participation.team.id then true else false
-        )[0]
+        p = @findParticipation(team)
         $.ajax "/participations/#{p.id}",
             type: 'DELETE',
             dataType: 'json',
@@ -36,7 +33,7 @@ class Staff
                 @participations.splice(@participations.indexOf(p), 1)
 
     toggleParticipation: (team) ->
-        if @participateIn(team)
+        if @findParticipation(team)
             @unparticipate(team)
         else
             @participate(team)

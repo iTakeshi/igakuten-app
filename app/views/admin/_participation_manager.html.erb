@@ -24,7 +24,7 @@
         <!-- ko ifnot: team.name == '休憩' -->
           <td>
             <div class="switch tooltip" data-bind="click: function(data, event) { staff.toggleParticipation(team, data, event) }, attr: { 'data-tooltip': staff.name() + ', ' + team.name }">
-              <span class="switch-input" data-bind="css: { checked: staff.participateIn(team) }"></span>
+              <span class="switch-input" data-bind="css: { checked: staff.findParticipation(team) }"></span>
               <span class="switch-label" data-on="参加" data-off="不参加"></span>
               <span class="switch-handle"></span>
             </div>
