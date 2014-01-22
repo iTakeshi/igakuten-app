@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# add following line to /etc/rc.local
+# /var/www/igakuten-app/current/run.sh start
+#
 
 APP_DIR=/var/www/igakuten-app/current
 THIN_CONFIG=$APP_DIR/config/thin.yml
