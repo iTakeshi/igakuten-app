@@ -17,10 +17,6 @@ module IgakutenApp
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Add asset paths
-    config.assets.paths << Rails.root.join('app', 'assets', 'javascripts', 'page_specific')
-    config.assets.precompile += %w(participation_manager.js.coffee quorum_manager.js.coffee shift_manager.js.coffee)
-
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Tokyo'

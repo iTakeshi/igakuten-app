@@ -13,4 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require knockout
-//= require_directory .
+//= require_tree .
