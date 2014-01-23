@@ -23,6 +23,9 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 # Use thin as the app server
 gem 'thin'
 
+# Use figaro for env-specific configurations
+gem 'figaro'
+
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 

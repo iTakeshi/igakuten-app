@@ -94,6 +94,9 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formtastic (2.3.0.rc2)
       actionpack (>= 3.0)
     has_scope (0.6.0.rc)
@@ -221,6 +224,7 @@ DEPENDENCIES
   binding_of_caller
   capistrano-rails
   coffee-rails (~> 4.0.0)
+  figaro
   jbuilder
   jquery-rails
   kawaii_validation

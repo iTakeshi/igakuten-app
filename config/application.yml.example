@@ -1,0 +1,3 @@
+production:
+  SMTP_USER: user@example.com
+  SMTP_PASS: password

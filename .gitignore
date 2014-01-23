@@ -17,4 +17,5 @@
 /tmp
 
 # Ignore private files.
+/config/application.yml
 /config/initializers/secret_token.rb
