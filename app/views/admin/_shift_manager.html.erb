@@ -23,6 +23,17 @@
   </tbody>
 </table>
 
-<ul data-bind="foreach: { data: teams, as: 'team' }">
-  <li data-bind="text: team.name"></li>
-</ul>
+<div id="selector">
+  <div id="selector-header">
+    <h1>チームを選択</h1>
+    <div id="selector-close">&times;</div>
+  </div>
+  <div id="selector-body">
+    <ul>
+      <li>取消</li>
+      <!-- ko foreach: { data: teams, as: 'team' } -->
+        <li data-bind="text: team.name"></li>
+      <!-- /ko -->
+    </ul>
+  </div>
+</div>
