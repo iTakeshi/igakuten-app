@@ -1,6 +1,6 @@
 #= require active_admin/base
 #= require knockout
-#= require_directory ./manager
+#= require_tree ./manager
 
 $ ->
     vm = new ViewModel
