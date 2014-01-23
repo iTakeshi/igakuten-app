@@ -15,25 +15,26 @@
       <td data-bind="text: gender"></td>
       <td data-bind="text: name"></td>
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
-        <td>
+        <td class="shift-cell">
           <span data-bind="text: staff.teamWorkingWith(period)"></span>
+
+          <div class="selector">
+            <div class="selector-header">
+              <h1>チームを選択</h1>
+              <div class="selector-close">&times;</div>
+            </div>
+            <div class="selector-body">
+              <ul>
+                <li>取消</li>
+                <!-- ko foreach: { data: $root.teams, as: 'team' } -->
+                  <li data-bind="text: team.name"></li>
+                <!-- /ko -->
+              </ul>
+            </div>
+          </div>
+
         </td>
       <!-- /ko -->
     </tr>
   </tbody>
 </table>
-
-<div id="selector">
-  <div id="selector-header">
-    <h1>チームを選択</h1>
-    <div id="selector-close">&times;</div>
-  </div>
-  <div id="selector-body">
-    <ul>
-      <li>取消</li>
-      <!-- ko foreach: { data: teams, as: 'team' } -->
-        <li data-bind="text: team.name"></li>
-      <!-- /ko -->
-    </ul>
-  </div>
-</div>
