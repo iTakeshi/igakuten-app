@@ -45,7 +45,7 @@ class Staff
         if shift
             shift.participation.team.name
         else
-            false
+            ""
 
     createShift: (period, team) ->
         if team

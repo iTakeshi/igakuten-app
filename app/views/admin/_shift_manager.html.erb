@@ -15,20 +15,14 @@
       <td data-bind="text: gender"></td>
       <td data-bind="text: name"></td>
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
-        <!-- ko if: staff.teamWorkingWith(period) -->
-          <td>
-            <span data-bind="text: staff.teamWorkingWith(period)"></span>
-            <button data-bind="click: function(data, event) { staff.destroyShift(period) }">取消</button>
-          </td>
-        <!-- /ko -->
-        <!-- ko ifnot: staff.teamWorkingWith(period) -->
-          <td data-bind="click: function(data, event) { staff.createShift(period, $root.selectedTeam(), data, event) }"></td>
-        <!-- /ko -->
+        <td>
+          <span data-bind="text: staff.teamWorkingWith(period)"></span>
+        </td>
       <!-- /ko -->
     </tr>
   </tbody>
 </table>
 
 <ul data-bind="foreach: { data: teams, as: 'team' }">
-  <li data-bind="text: team.name, click: $parent.selectedTeam.bind(team)"></li>
+  <li data-bind="text: team.name"></li>
 </ul>

@@ -13,9 +13,6 @@ class ViewModel
         @shifts         = ko.observableArray(shifts)
         @staffs         = ko.observableArray(staffs)
 
-        # ShiftManager specific
-        @selectedTeam = ko.observable()
-
     # QuorumManager specific
     updateQuorum: (period, team, num) ->
         q = $.grep(team.quorums(), (quorum) ->
