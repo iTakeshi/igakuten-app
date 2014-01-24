@@ -27,9 +27,9 @@
             </div>
             <div class="selector-body">
               <ul>
-                <li data-bind="click: function(data, event){ staff.toggleShift(period, null); }">取消</li>
+                <li data-bind="css: { clickable: staff.teamWorkingWith(period) }, click: function(data, event){ staff.toggleShift(period, null); }">取消</li>
                 <!-- ko foreach: { data: $root.teams, as: 'team' } -->
-                  <li data-bind="text: team.name, click: function(data, event){ staff.toggleShift(period, team); }"></li>
+                  <li data-bind="text: team.name, css: { clickable: staff.findParticipation(team) }, click: function(data, event){ staff.toggleShift(period, team); }"></li>
                 <!-- /ko -->
               </ul>
             </div>
