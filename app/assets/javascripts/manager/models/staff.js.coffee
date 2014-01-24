@@ -81,6 +81,8 @@ class Staff
                 @shifts.splice(@shifts.indexOf(shift), 1)
 
     toggleShift: (period, team) ->
+        if team && !@findParticipation(team)
+            return false
         if @teamWorkingWith(period)
             @destroyShift(period)
         if team
