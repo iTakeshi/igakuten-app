@@ -16,7 +16,7 @@
       <td data-bind="text: name"></td>
       <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
         <td class="shift-cell">
-          <div class="shift-cell-body tooltip" data-bind="attr: { 'data-tooltip': staff.name() + ', ' + period.time }">
+          <div class="shift-cell-body tooltip" data-bind="attr: { 'data-tooltip': staff.name + ', ' + period.time }">
             <span data-bind="text: staff.teamWorkingWith(period)"></span>
           </div>
 

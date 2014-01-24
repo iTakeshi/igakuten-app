@@ -1,9 +1,9 @@
 class Staff
     constructor: (id, grade, gender, name, participations, shifts) ->
-        @id     = ko.observable(id)
-        @grade  = ko.observable(grade)
-        @gender = ko.observable(gender)
-        @name   = ko.observable(name)
+        @id     = id
+        @grade  = grade
+        @gender = gender
+        @name   = name
         @participations = ko.observableArray(participations)
         @shifts         = ko.observableArray(shifts)
 
