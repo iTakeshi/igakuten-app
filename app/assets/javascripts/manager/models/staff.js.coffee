@@ -74,9 +74,16 @@ class Staff
         )[0]
         return false unless shift
         $.ajax "/shifts/#{shift.id}",
+            async: false,
             type: 'DELETE',
             dataType: 'json',
             success: (data) =>
                 @shifts.splice(@shifts.indexOf(shift), 1)
+
+    toggleShift: (period, team) ->
+        if @teamWorkingWith(period)
+            @destroyShift(period)
+        if team
+            @createShift(period, team)
 
 window.Staff = Staff
