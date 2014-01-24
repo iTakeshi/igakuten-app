@@ -1,4 +1,5 @@
-.tooltip:hover {
+.tooltip:hover,
+.shift-cell.active .tooltip {
   position: relative;
 
   &::before {
