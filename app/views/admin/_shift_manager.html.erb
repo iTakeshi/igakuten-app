@@ -27,9 +27,9 @@
             </div>
             <div class="selector-body">
               <ul>
-                <li>取消</li>
+                <li data-bind="click: function(data, event){ staff.destroyShift(period); }">取消</li>
                 <!-- ko foreach: { data: $root.teams, as: 'team' } -->
-                  <li data-bind="text: team.name"></li>
+                  <li data-bind="text: team.name, click: function(data, event){ staff.createShift(period, team); }"></li>
                 <!-- /ko -->
               </ul>
             </div>
