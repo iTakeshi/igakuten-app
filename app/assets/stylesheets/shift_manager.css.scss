@@ -1,13 +1,25 @@
 .shift-cell {
   position: relative;
+  padding: 0 !important;
+
+  .shift-cell-body {
+    display: block;
+    box-sizing: border-box;
+    width: inherit;
+    height: 35px;
+    padding: 10px 12px 8px 12px;
+    cursor: pointer;
+  }
 
   .selector {
     position: absolute;
-    top: 37px; left: 0;
+    top: 35px; left: 0px;
+    z-index: 10;
     display: none;
     width: 240px;
     margin: 0;
     padding: 0;
+    background: #fff;
 
     .selector-header {
       position: relative;
@@ -36,6 +48,7 @@
         line-height: 24px;
         text-align: center;
         color: #ddd;
+        cursor: pointer;
       }
     }
 
@@ -67,4 +80,15 @@
     }
   }
 
+}
+
+.shift-cell.active {
+  .shift-cell-body {
+    padding: 8px 10px 6px 10px;
+    border: 2px solid #bbb;
+  }
+
+  .selector {
+    display: block;
+  }
 }
