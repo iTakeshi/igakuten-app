@@ -40,3 +40,28 @@
     </tr>
   </tbody>
 </table>
+
+<table class="index_table">
+  <thead>
+    <tr>
+      <th>チーム</th>
+      <!-- ko foreach: periods -->
+        <th data-bind="text: time"></th>
+      <!-- /ko -->
+    </tr>
+  </thead>
+  <tbody data-bind="foreach: { data: teams, as: 'team' }">
+    <tr data-bind="css: { even: $index() % 2 == 1 }">
+      <td data-bind="text: team.name"></td>
+      <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
+        <td>
+          <ul data-bind="foreach: { data: $root.staffs, as: 'staff' }">
+            <!-- ko if: staff.teamWorkingWith(period) == team.name -->
+              <li data-bind="text: staff.name"></li>
+            <!-- /ko -->
+          </ul>
+        </td>
+      <!-- /ko -->
+    </tr>
+  </tbody>
+</table>
