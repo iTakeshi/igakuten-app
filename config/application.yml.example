@@ -7,3 +7,7 @@ production:
   SMTP_PASS: password
   HTTP_USER: user
   HTTP_PASS: pass
+
+test:
+  HTTP_USER: user
+  HTTP_PASS: pass
