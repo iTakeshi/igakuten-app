@@ -100,8 +100,11 @@
 }
 
 .working-staffs {
+  position: relative;
 
   ul {
+    position: absolute;
+    top: 8px; left: 12px;
     margin: 3px 0;
     padding: 0;
     list-style: none;
@@ -121,6 +124,15 @@
         margin: 0;
         line-height: inherit;
       }
+    }
+  }
+
+  ul.quorum-dummy {
+    position: static;
+
+    li {
+      border: 1px solid #aaa;
+      background: #eee;
     }
   }
 }
