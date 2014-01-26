@@ -98,3 +98,29 @@
     display: block;
   }
 }
+
+.working-staffs {
+
+  ul {
+    margin: 3px 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: block;
+      width: 90px;
+      height: 20px;
+      border: 1px solid #47a8d8;
+      margin: 2px 0;
+      padding: 0 3px;
+      line-height: 20px;
+      background: #e1f1f9;
+      overflow: hidden;
+
+      span {
+        margin: 0;
+        line-height: inherit;
+      }
+    }
+  }
+}
