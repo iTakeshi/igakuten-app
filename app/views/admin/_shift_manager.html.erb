@@ -56,6 +56,9 @@
         <td data-bind="text: team.name"></td>
         <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
           <td class="working-staffs tooltip" data-bind="attr: { 'data-tooltip': team.name + ', ' + period.time }">
+            <div>
+              定員：<span data-bind="text: team.quorum(period)"></span>
+            </div>
             <ul class="quorum-dummy" data-bind="foreach: new Array(team.quorum(period)())">
               <li></li>
             </ul>

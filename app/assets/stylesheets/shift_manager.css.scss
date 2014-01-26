@@ -104,7 +104,7 @@
 
   ul {
     position: absolute;
-    top: 8px; left: 12px;
+    top: 25px; left: 12px;
     margin: 3px 0;
     padding: 0;
     list-style: none;
@@ -134,5 +134,9 @@
       border: 1px solid #aaa;
       background: #eee;
     }
+  }
+
+  div {
+    text-align: center;
   }
 }
