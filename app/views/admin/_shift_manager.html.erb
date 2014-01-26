@@ -55,7 +55,7 @@
       <tr data-bind="css: { even: $index() % 2 == 0 }">
         <td data-bind="text: team.name"></td>
         <!-- ko foreach: { data: $parent.periods, as: 'period' } -->
-          <td class="working-staffs">
+          <td class="working-staffs tooltip" data-bind="attr: { 'data-tooltip': team.name + ', ' + period.time }">
             <ul data-bind="foreach: { data: $root.staffs, as: 'staff' }">
               <!-- ko if: staff.teamWorkingWith(period) == team.name -->
                 <li>
