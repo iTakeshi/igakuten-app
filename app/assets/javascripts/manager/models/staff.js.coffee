@@ -15,7 +15,7 @@ class Staff
     participate: (team) ->
         participation = new Participation null,
             team,
-            @id()
+            @id
         $.ajax "/participations",
             type: 'POST',
             data: { "participation": participation.toParams() },
