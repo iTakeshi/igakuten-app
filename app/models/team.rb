@@ -4,6 +4,7 @@ class Team < ActiveRecord::Base
   has_many :staffs, through: :participations
   has_many :shifts, through: :participations
   has_many :quorums, dependent: :destroy
+  has_and_belongs_to_many :mailing_lists
 
   validates :name do
     presence
