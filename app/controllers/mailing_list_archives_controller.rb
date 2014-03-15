@@ -1,4 +1,12 @@
 class MailingListArchivesController < ApplicationController
+  # GET /mailing_list_archives.json
+  def index
+    # NOTE This action is DUMMY.
+    # In order to register a URL (to which inbound-email API will be posted) to
+    # Mandrill, GET request to the URL must be accepted.
+    render json: { status: :ok }
+  end
+
   # POST /mailing_list_archives.json
   def create
     message = ActiveSupport::JSON.decode(params['mandrill_events'])['msg']

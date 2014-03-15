@@ -1,7 +1,7 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :mailing_list_archives, only: :create
+  resources :mailing_list_archives, only: %i(index create)
 
   resources :participations,        only: %i(index create destroy)
 
