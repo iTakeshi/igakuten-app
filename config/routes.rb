@@ -1,19 +1,21 @@
 IgakutenApp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :participations, only: %i(index create destroy)
+  resources :mailing_list_archives, only: :create
 
-  resources :shifts,         only: %i(index create destroy)
+  resources :participations,        only: %i(index create destroy)
 
-  resources :quorums,        only: %i(index update)
+  resources :shifts,                only: %i(index create destroy)
 
-  resources :periods,        only: :index
+  resources :quorums,               only: %i(index update)
 
-  resources :teams,          only: :index
+  resources :periods,               only: :index
 
-  resources :sections,       only: :index
+  resources :teams,                 only: :index
 
-  resources :staffs,         only: :index do
+  resources :sections,              only: :index
+
+  resources :staffs,                only: :index do
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
     end
