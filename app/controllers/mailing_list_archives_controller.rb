@@ -25,6 +25,10 @@ class MailingListArchivesController < ApplicationController
     body = message['text']
     raw_source = message['raw_msg']
 
+    if messaage['attachments']
+      # TODO notify sender
+    end
+
     mla = MailingListArchive.new mailing_list: mailing_list,
                                  staff: staff,
                                  subject: subject,
