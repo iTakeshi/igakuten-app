@@ -23,11 +23,13 @@ class MailingListArchivesController < ApplicationController
     end
     subject = message['subject']
     body = message['text']
+    raw_source = message['raw_msg']
 
     mla = MailingListArchive.new mailing_list: mailing_list,
                                  staff: staff,
                                  subject: subject,
-                                 body: body
+                                 body: body,
+                                 raw_source: raw_msg
     if mla.save
       render json: { status: :ok }
     else
