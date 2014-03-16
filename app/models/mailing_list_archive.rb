@@ -3,7 +3,7 @@ class MailingListArchive < ActiveRecord::Base
   belongs_to :staff
 
   def publish
-    to_addresses = self.mailing_list.staffs.map(&:email).uniq
+    to_addresses = self.mailing_list.teams.map(&:staffs).flatten.uniq
 
     MailingListMailer.default(
       to_addresses,
