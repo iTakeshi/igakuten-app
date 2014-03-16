@@ -5,5 +5,7 @@ development:
 production:
   SMTP_USER: user@example.com
   SMTP_PASS: password
+  ML_SMTP_USER: ml@example.com
+  ML_SMTP_PASS: password
   HTTP_USER: user
   HTTP_PASS: pass
