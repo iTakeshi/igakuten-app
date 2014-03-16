@@ -25,7 +25,7 @@ class MailingListArchivesController < ApplicationController
     body = message['text']
     raw_source = message['raw_msg']
 
-    if messaage['attachments']
+    if message['attachments']
       # TODO notify sender
     end
 
