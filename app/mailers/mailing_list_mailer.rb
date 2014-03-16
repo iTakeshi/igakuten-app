@@ -1,13 +1,13 @@
 class MailingListMailer < ActionMailer::Base
   after_action :set_delivery_options
 
-  def publication(to_addresses, ml_email, sender_name, sender_email, subject, body)
+  def publication(to_addresses, ml_email, sender_name, sender_email, message_subject, message_body)
     @ml_email = ml_email
     @sender_name = sender_name
     @sender_email = sender_email
-    @body = body
+    @message_body = message_body
 
-    mail to: to_addresses, from: ml_email, reply_to: sender_email, subject: subject
+    mail to: to_addresses, from: ml_email, reply_to: sender_email, subject: message_subject
   end
 
   private
