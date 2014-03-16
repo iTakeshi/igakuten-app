@@ -6,4 +6,8 @@ class MailingList < ActiveRecord::Base
     presence
     uniqueness
   end
+
+  def email
+    "#{account_name}@ml.hokudai-igakuten.org"
+  end
 end

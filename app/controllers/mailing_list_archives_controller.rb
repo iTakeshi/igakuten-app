@@ -36,6 +36,7 @@ class MailingListArchivesController < ApplicationController
                                  raw_source: raw_source
     if mla.save
       render json: { status: :ok }
+      mla.publish
     else
       # TODO notify sender
       render json: { status: :error }
