@@ -29,7 +29,7 @@ class MailingListArchivesController < ApplicationController
                                  staff: staff,
                                  subject: subject,
                                  body: body,
-                                 raw_source: raw_msg
+                                 raw_source: raw_source
     if mla.save
       render json: { status: :ok }
     else
