@@ -9,7 +9,7 @@ class MailingListArchivesController < ApplicationController
 
   # POST /mailing_list_archives.json
   def create
-    message = ActiveSupport::JSON.decode(params['mandrill_events'])['msg']
+    message = ActiveSupport::JSON.decode(params['mandrill_events']).first['msg']
 
     unless mailing_list = MailingList.find(account_name: message['email'].split('@').first)
       # TODO notify sender
