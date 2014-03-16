@@ -11,7 +11,7 @@ class MailingListArchivesController < ApplicationController
   def create
     message = ActiveSupport::JSON.decode(params['mandrill_events'])['msg']
 
-    unless mailing_list = MailingList.find(account_name: message['email'])
+    unless mailing_list = MailingList.find(account_name: message['email'].split('@').first)
       # TODO notify sender
       render json: { status: :error }
       raise RuntimeError
