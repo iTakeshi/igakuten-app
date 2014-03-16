@@ -1,5 +1,5 @@
 class MailingListMailer < ActionMailer::Base
-  def default(to_addresses, ml_email, sender_name, sender_email, subject, body)
+  def publication(to_addresses, ml_email, sender_name, sender_email, subject, body)
     @ml_email = ml_email
     @sender_name = sender_name
     @sender_email = sender_email
