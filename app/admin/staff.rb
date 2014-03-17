@@ -62,13 +62,13 @@ ActiveAdmin.register Staff do
   end
 
   collection_action :create_invitation, method: :post do
-    @invitation = Invitation.new(params[:invitation])
+    @invitation = Invitation.new(email: params[:invitation][:email])
 
-    if @invitation.valid?
-      @invitation.exec
+    if @invitation.save
       redirect_to({ action: :new_invitation }, { notice: "#{@invitation.email}さんに招待メールを送信しました。" })
     else
-      render({ action: :new_invitation }, { notice: 'メールアドレスの形式が不正です。' })
+      flash.now[:alert] = 'メールアドレスの形式が不正です。招待を送信できません。'
+      render action: :new_invitation
     end
   end
 

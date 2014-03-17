@@ -1,12 +1,14 @@
+class Invitation < ActiveRecord::Base
+  validates :email do
+    presence
+    uniqueness
+    format with: /[^\s@]+@[^\s@]+/
+  end
 
-class Invitation
-  include ActiveModel::Model
-
-  attr_accessor :email
-
-  validates :email,
-    presence: true,
-    format: { with: /[^\s@]+@[^\s@]+/ }
+  validates :invitation_code do
+    presence
+    uniqueness
+  end
 
   def exec
     # WIP
