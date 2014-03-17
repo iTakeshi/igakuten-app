@@ -1,4 +1,6 @@
 class StaffsController < ApplicationController
+  skip_before_filter :authenticate, only: :verificate
+
   before_action :set_staff, except: %i(index teams)
 
   # GET /staffs.json
