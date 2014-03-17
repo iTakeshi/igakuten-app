@@ -1,8 +1,6 @@
 class StaffsController < ApplicationController
   skip_before_filter :authenticate, only: %i(verificate invite create)
 
-  before_action :set_staff, except: %i(index teams invite create)
-
   # GET /staffs.json
   def index
     @staffs = Staff.ordered
@@ -10,6 +8,7 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/verificate/:verification_code
   def verificate
+    @staff = Staff.find(params[:id])
     @staff.verificate(params[:verification_code])
   end
 
@@ -36,9 +35,6 @@ class StaffsController < ApplicationController
   end
 
   private
-  def set_staff
-    @staff = Staff.find(params[:id])
-  end
 
   def staff_params
     params.require(:staff).permit(:family_name, :given_name, :family_name_yomi, :given_name_yomi, :gender, :grade, :email, :phone)
