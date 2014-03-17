@@ -1,0 +1,36 @@
+<%= form_for @staff do |f| %>
+  <div>
+    <%= f.label :family_name, '苗字' %>
+    <%= f.text_field :family_name %>
+  </div>
+  <div>
+    <%= f.label :given_name, '名前' %>
+    <%= f.text_field :given_name %>
+  </div>
+  <div>
+    <%= f.label :family_name_yomi, 'みょうじ' %>
+    <%= f.text_field :family_name_yomi %>
+  </div>
+  <div>
+    <%= f.label :given_name_yomi, 'なまえ' %>
+    <%= f.text_field :given_name_yomi %>
+  </div>
+  <div>
+    <%= f.label :gender, '性別' %>
+    <%= f.select :gender, [['男', 1], ['女', 0]] %>
+  </div>
+  <div>
+    <%= f.label :grade, '学年' %>
+    <%= f.select :grade, 1..6 %>
+  </div>
+  <div>
+    <%= f.label :email, 'E-mail' %>
+    <%= f.email_field :email, readonly: true %>
+  </div>
+  <div>
+    <%= f.label :phone, '電話番号' %>
+    <%= f.text_field :phone %>
+  </div>
+  <%= hidden_field_tag :invitation_code, @invitation_code %>
+  <%= f.submit '仮登録' %>
+<% end %>

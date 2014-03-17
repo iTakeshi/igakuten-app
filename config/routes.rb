@@ -15,7 +15,10 @@ IgakutenApp::Application.routes.draw do
 
   resources :sections,              only: :index
 
-  resources :staffs,                only: :index do
+  resources :staffs,                only: %i(index create) do
+    collection do
+      get 'invite/:invitation_code', action: :invite, as: :invite
+    end
     member do
       get 'verificate/:verification_code', action: :verificate, as: :verificate
     end
