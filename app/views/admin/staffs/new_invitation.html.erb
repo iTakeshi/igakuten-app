@@ -1,0 +1,7 @@
+<%= form_for @invitation, url: create_invitation_admin_staffs_path do |f| %>
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+  <%= f.submit :Invite %>
+<% end %>
