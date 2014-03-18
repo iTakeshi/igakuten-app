@@ -7,6 +7,9 @@ ActiveAdmin.register Invitation do
 
   index do
     column :email
+    column '招待メール再送' do |invitation|
+      link_to '招待メール再送', send_invitation_admin_invitation_path(invitation)
+    end
     default_actions
   end
 
@@ -15,6 +18,12 @@ ActiveAdmin.register Invitation do
       f.input :email, as: :email
     end
     f.actions
+  end
+
+  member_action :send_invitation, method: :get do
+    invitation = Invitation.find(params[:id])
+    invitation.send_invitation_mail
+    redirect_to admin_invitations_path, notice: '招待メールを再送しました。'
   end
 
   controller do

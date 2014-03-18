@@ -14,6 +14,10 @@ class Invitation < ActiveRecord::Base
 
   after_create :send_invitation_mail
 
+  def send_invitation_mail
+    StaffInvitor.invitation(self).deliver
+  end
+
   private
 
   def set_invitation_code
@@ -21,9 +25,5 @@ class Invitation < ActiveRecord::Base
       code = SecureRandom.hex(10)
     end while Invitation.exists?(invitation_code: code)
     self.invitation_code = code
-  end
-
-  def send_invitation_mail
-    StaffInvitor.invitation(self).deliver
   end
 end
