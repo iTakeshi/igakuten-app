@@ -27,8 +27,6 @@ class StaffsController < ApplicationController
 
     @staff = Staff.new_by_invitation(staff_params)
     if @staff.save
-      invitation.accepted = true
-      invitation.save!
       render
     else
       render action: :invite

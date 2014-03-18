@@ -49,7 +49,7 @@ class Staff < ActiveRecord::Base
 
   after_save :send_verification, if: 'self.email_changed?', unless: 'self.by_invitation'
 
-  after_create :participate_in_team_recess
+  after_create :callback_after_create
 
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
 
@@ -112,12 +112,24 @@ class Staff < ActiveRecord::Base
 
   private
 
+  def callback_after_create
+    participate_in_team_recess
+    search_invitation
+  end
+
   def participate_in_team_recess
     team_recess = Team.where(name: '休憩').first
     if team_recess
       self.teams << team_recess
     else
       puts 'WARNING: Team "休憩"が登録されていません'
+    end
+  end
+
+  def search_invitation
+    if invitation = Invitation.find_by(email: self.email)
+      invitation.accepted = true
+      invitation.save!
     end
   end
 end
