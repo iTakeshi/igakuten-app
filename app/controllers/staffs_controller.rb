@@ -31,7 +31,7 @@ class StaffsController < ApplicationController
       render template: 'staffs/invitation_code_error'
       return
     end
-    unless invitation.invitation_code == params[:staff][:email]
+    unless invitation.email == params[:staff][:email]
       render template: 'staffs/invitation_code_error'
       return
     end
