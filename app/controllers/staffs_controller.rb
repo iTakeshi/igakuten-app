@@ -14,15 +14,30 @@ class StaffsController < ApplicationController
 
   # GET /staffs/invite/:invitation_code
   def invite
-    invitation = Invitation.find_by(invitation_code: params[:invitation_code])
+    unless invitation = Invitation.find_by(invitation_code: params[:invitation_code])
+      render template: 'staffs/invitation_code_error'
+      return
+    end
+    if invitation.accepted
+      render template: 'staffs/invitation_accepted'
+      return
+    end
     @staff = Staff.new(email: invitation.email)
     @invitation_code = invitation.invitation_code
   end
 
   def create
-    invitation = Invitation.find_by(email: params[:staff][:email])
-    if invitation.invitation_code != params[:invitation_code]
-      raise
+    unless invitation = Invitation.find_by(invitation_code: params[:invitation_code])
+      render template: 'staffs/invitation_code_error'
+      return
+    end
+    unless invitation.invitation_code == params[:staff][:email]
+      render template: 'staffs/invitation_code_error'
+      return
+    end
+    if invitation.accepted
+      render template: 'staffs/invitation_accepted'
+      return
     end
 
     @staff = Staff.new_by_invitation(staff_params)
