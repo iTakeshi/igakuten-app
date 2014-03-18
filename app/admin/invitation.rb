@@ -30,6 +30,10 @@ ActiveAdmin.register Invitation do
 
   controller do
     def create
+      if Staff.find_by(email: params[:invitation][:email])
+        redirect_to new_admin_invitation_path, alert: "このメールアドレスはすでにスタッフ登録されています。"
+        return
+      end
       create! do |format|
         format.html { redirect_to new_admin_invitation_path }
       end
