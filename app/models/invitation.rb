@@ -16,7 +16,8 @@ class Invitation < ActiveRecord::Base
 
   scope :awaiting, -> { where(accepted: false) }
 
-  def initialize
+  def initialize(attributes = {}, options = {})
+    super
     self.accepted = false
   end
 
