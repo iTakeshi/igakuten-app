@@ -5,6 +5,8 @@ ActiveAdmin.register Invitation do
 
   actions :all, except: %i(show edit update)
 
+  scope :awaiting, default: true
+
   index do
     column :email
     column '招待メール再送' do |invitation|

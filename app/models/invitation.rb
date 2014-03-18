@@ -14,6 +14,8 @@ class Invitation < ActiveRecord::Base
 
   after_create :send_invitation_mail
 
+  scope :awaiting, -> { where(accepted: false) }
+
   def initialize
     self.accepted = false
   end
