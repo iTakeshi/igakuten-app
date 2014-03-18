@@ -3,8 +3,11 @@ ActiveAdmin.register Invitation do
 
   permit_params %i(email)
 
+  actions :all, except: %i(show edit update)
+
   index do
     column :email
+    default_actions
   end
 
   form do |f|
