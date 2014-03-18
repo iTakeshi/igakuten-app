@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317104128) do
+ActiveRecord::Schema.define(version: 20140318021558) do
 
   create_table "festival_dates", force: true do |t|
     t.integer  "day",        null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140317104128) do
     t.string   "invitation_code", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "accepted"
   end
 
   add_index "invitations", ["email"], name: "index_invitations_on_email", unique: true

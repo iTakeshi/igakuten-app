@@ -14,6 +14,10 @@ class Invitation < ActiveRecord::Base
 
   after_create :send_invitation_mail
 
+  def initialize
+    self.accepted = false
+  end
+
   def send_invitation_mail
     StaffInvitor.invitation(self).deliver
   end
