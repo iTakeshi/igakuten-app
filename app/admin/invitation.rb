@@ -29,7 +29,7 @@ ActiveAdmin.register Invitation do
   controller do
     def create
       create! do |format|
-        format.html { redirect_to admin_invitations_path }
+        format.html { redirect_to new_admin_invitation_path }
       end
     end
   end
