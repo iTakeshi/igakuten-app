@@ -25,8 +25,7 @@ class StaffsController < ApplicationController
       raise
     end
 
-    @staff = Staff.new(staff_params)
-    @staff.provisional = true
+    @staff = Staff.new_by_invitation(staff_params)
     if @staff.save
       render
     else

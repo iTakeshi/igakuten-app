@@ -4,6 +4,8 @@ class Staff < ActiveRecord::Base
   has_many :shifts, through: :participations
   has_many :periods, through: :shifts
 
+  attr_accessor :by_invitation
+
   validates :family_name do
     presence
   end
@@ -43,13 +45,28 @@ class Staff < ActiveRecord::Base
     uniqueness
   end
 
-  before_validation :set_verification_code, if: 'self.email_changed?'
+  before_validation :set_verification_code, if: 'self.email_changed?', unless: 'self.by_invitation'
 
-  after_save :send_verification, if: 'self.email_changed?'
+  after_save :send_verification, if: 'self.email_changed?', unless: 'self.by_invitation'
 
   after_create :participate_in_team_recess
 
   scope :ordered, -> { reorder('grade ASC, gender DESC, family_name_yomi ASC, given_name_yomi ASC') }
+
+  def Staff.new_by_invitation(staff_params)
+    staff = Staff.new(staff_params)
+    staff.set_verification_code
+    staff.provisional = true
+    staff.email_verificated = true
+    staff.email_once_verificated = true
+    staff.by_invitation = true
+    staff
+  end
+
+  def initialize(attributes = {}, options = {})
+    super
+    @by_invitation = false
+  end
 
   def full_name
     "#{self.family_name} #{self.given_name}"
@@ -85,7 +102,6 @@ class Staff < ActiveRecord::Base
     EmailVerificator.verification(self).deliver
   end
 
-  private
   def set_verification_code
     self.email_verificated = false
     begin
@@ -93,6 +109,8 @@ class Staff < ActiveRecord::Base
     end while Staff.exists?(email_verification_code: code)
     self.email_verification_code = code
   end
+
+  private
 
   def participate_in_team_recess
     team_recess = Team.where(name: '休憩').first
