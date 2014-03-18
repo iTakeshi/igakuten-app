@@ -53,25 +53,6 @@ ActiveAdmin.register Staff do
     f.actions
   end
 
-  action_item only: :index do
-    link_to('Invite staff', new_invitation_admin_staffs_path)
-  end
-
-  collection_action :new_invitation, method: :get do
-    @invitation = Invitation.new
-  end
-
-  collection_action :create_invitation, method: :post do
-    @invitation = Invitation.new(email: params[:invitation][:email])
-
-    if @invitation.save
-      redirect_to({ action: :new_invitation }, { notice: "#{@invitation.email}さんに招待メールを送信しました。" })
-    else
-      flash.now[:alert] = 'メールアドレスの形式が不正です。招待を送信できません。'
-      render action: :new_invitation
-    end
-  end
-
   member_action :register, method: :get do
     staff = Staff.find(params[:id])
     staff.register
