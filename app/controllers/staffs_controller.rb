@@ -41,6 +41,7 @@ class StaffsController < ApplicationController
     end
 
     @staff = Staff.new_by_invitation(staff_params)
+    @staff.phone = TelFormatter.format(@staff.phone)
     if @staff.save
       render
     else
