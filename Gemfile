@@ -18,6 +18,9 @@ gem 'kawaii_validation'
 # Administration console
 gem 'activeadmin', github: 'gregbell/active_admin'
 
+# Format tel number
+gem 'tel_formatter'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
