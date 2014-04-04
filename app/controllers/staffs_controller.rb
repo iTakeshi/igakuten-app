@@ -22,7 +22,14 @@ class StaffsController < ApplicationController
       render template: 'staffs/invitation_accepted'
       return
     end
-    @staff = Staff.new(email: invitation.email)
+    # NOTE Dirty hack
+    if flash[:staff_params]
+      @staff = Staff.new(flash[:staff_params])
+      @staff.teams = Team.where(id: flash[:staff_team_ids])
+      @staff.valid?
+    else
+      @staff = Staff.new(email: invitation.email)
+    end
     @invitation_code = invitation.invitation_code
 
     @teams = Team.where.not(name: '休憩').ordered
@@ -53,9 +60,10 @@ class StaffsController < ApplicationController
       @staff.teams << Team.where(id: params[:staff][:team_ids])
       render
     else
-      @staff.teams = Team.where(id: params[:staff][:team_ids])
-      @teams = Team.where.not(name: '休憩').ordered
-      render action: :invite
+      # NOTE Dirty hack
+      flash[:staff_params] = staff_params
+      flash[:staff_team_ids] = params[:staff][:team_ids]
+      redirect_to invite_staffs_url(invitation.invitation_code)
     end
   end
 
