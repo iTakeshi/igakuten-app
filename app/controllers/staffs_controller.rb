@@ -25,7 +25,7 @@ class StaffsController < ApplicationController
     @staff = Staff.new(email: invitation.email)
     @invitation_code = invitation.invitation_code
 
-    @teams = Team.where.not(name: '休憩')
+    @teams = Team.where.not(name: '休憩').ordered
   end
 
   def create
@@ -43,10 +43,18 @@ class StaffsController < ApplicationController
     end
 
     @staff = Staff.new_by_invitation(staff_params)
-    @staff.phone = TelFormatter.format(@staff.phone)
+    begin
+      @staff.phone = TelFormatter.format(@staff.phone)
+    rescue
+      @staff.phone = ""
+    end
+
     if @staff.save
+      @staff.teams = Team.where(id: params[:staff][:team_ids])
       render
     else
+      @staff.teams = Team.where(id: params[:staff][:team_ids])
+      @teams = Team.where.not(name: '休憩').ordered
       render action: :invite
     end
   end

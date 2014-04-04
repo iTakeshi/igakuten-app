@@ -1,4 +1,12 @@
 <%= form_for @staff do |f| %>
+  <% if @staff.errors.any? %>
+    <ul>
+      <% @staff.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div>
     <%= f.label :family_name, '苗字' %>
     <%= f.text_field :family_name %>
