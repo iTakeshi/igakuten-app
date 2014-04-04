@@ -50,7 +50,7 @@ class StaffsController < ApplicationController
     end
 
     if @staff.save
-      @staff.teams = Team.where(id: params[:staff][:team_ids])
+      @staff.teams << Team.where(id: params[:staff][:team_ids])
       render
     else
       @staff.teams = Team.where(id: params[:staff][:team_ids])
