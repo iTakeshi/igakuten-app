@@ -24,6 +24,8 @@ class StaffsController < ApplicationController
     end
     @staff = Staff.new(email: invitation.email)
     @invitation_code = invitation.invitation_code
+
+    @teams = Team.where.not(name: '休憩')
   end
 
   def create

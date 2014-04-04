@@ -31,6 +31,16 @@
     <%= f.label :phone, '電話番号' %>
     <%= f.text_field :phone %>
   </div>
+
+  <div>
+    <% @teams.all.each do |team| %>
+      <label>
+        <%= f.check_box :team_ids, { :checked => @staff.teams.include?(team), :name => 'staff[team_ids][]' }, team.id %>
+        <%= team.name %>
+      </label>
+    <% end %>
+  </div>
+
   <%= hidden_field_tag :invitation_code, @invitation_code %>
   <%= f.submit '仮登録' %>
 <% end %>
