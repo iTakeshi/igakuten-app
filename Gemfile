@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.0.5'
 gem 'sqlite3'
 
 gem 'sass-rails', '~> 4.0.0'
@@ -31,6 +31,7 @@ gem 'thin'
 gem 'figaro'
 
 # Use Capistrano for deployment
+gem 'capistrano', '3.1.0', group: :development
 gem 'capistrano-rails', group: :development
 
 # Debug environment
