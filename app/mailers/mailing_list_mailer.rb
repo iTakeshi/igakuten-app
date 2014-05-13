@@ -12,6 +12,6 @@ class MailingListMailer < ActionMailer::Base
     @sender_email = sender_email
     @message_body = message_body
 
-    mail to: to_addresses, from: ml_email, reply_to: sender_email, subject: message_subject
+    mail to: sender_email, bcc: to_addresses, from: ml_email, reply_to: sender_email, subject: message_subject
   end
 end
