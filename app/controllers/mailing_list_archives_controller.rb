@@ -11,15 +11,15 @@ class MailingListArchivesController < ApplicationController
   def create
     message = ActiveSupport::JSON.decode(params['mandrill_events']).first['msg']
 
-    unless mailing_list = MailingList.find_by(account_name: message['email'].split('@').first)
-      # TODO notify sender
-      render json: { status: :error }
-      raise RuntimeError
-    end
     unless staff = Staff.find_by(email: message['from_email'])
-      # TODO notify sender
-      render json: { status: :error }
-      raise RuntimeError
+      MlError.from_not_found(message['from_email']).deliver
+      render json: { status: :ok }
+      return
+    end
+    unless mailing_list = MailingList.find_by(account_name: message['email'].split('@').first)
+      MlError.ml_not_found(staff, message['email']).deliver
+      render json: { status: :ok }
+      return
     end
 
     unless subject = message['subject']
