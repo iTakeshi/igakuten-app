@@ -1,7 +1,4 @@
 class MailingListArchivesController < ApplicationController
-  # XXX
-  skip_before_filter :verify_authenticity_token
-
   # GET /mailing_list_archives.json
   def index
     # NOTE This action is DUMMY.
