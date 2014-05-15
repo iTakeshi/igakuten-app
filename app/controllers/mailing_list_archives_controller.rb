@@ -21,7 +21,11 @@ class MailingListArchivesController < ApplicationController
       render json: { status: :error }
       raise RuntimeError
     end
-    subject = message['subject']
+
+    unless subject = message['subject']
+      subject = '無題'
+    end
+    subject = "【医学展】 #{subject}"
     body = message['text']
     raw_source = message['raw_msg']
 
