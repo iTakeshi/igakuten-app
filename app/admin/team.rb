@@ -9,6 +9,12 @@ ActiveAdmin.register Team do
     column :section
     column :name
     column :display_order
+    column 'スタッフ数' do |team|
+      team.staffs.length
+    end
+    column '目標' do |team|
+      (team.quorums.map(&:quorum).reduce(&:+).to_f / 3).ceil
+    end
     default_actions
   end
 
