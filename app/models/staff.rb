@@ -110,6 +110,38 @@ class Staff < ActiveRecord::Base
     self.email_verification_code = code
   end
 
+  def notify_shifts
+    shifts = self.shifts
+    ordered_shifts = Period.ordered.map { |p|
+      shifts.find_by(period_id: p.id)
+    }.compact
+
+    compacted_shifts = []
+    skip_until = 0
+    for i in 0..(ordered_shifts.length - 1)
+      next if i < skip_until
+
+      breaked = false
+      i_tmp = i
+      for j in (i + 1)..(ordered_shifts.length - 1)
+        a = ordered_shifts[i_tmp]
+        b = ordered_shifts[j]
+        if a.participation != b.participation || a.period.ends_at != b.period.begins_at
+          breaked = true
+          break
+        end
+        i_tmp = j
+      end
+      j += 1 if j == ordered_shifts.length - 1 && !breaked
+      skip_until = j
+
+      compacted_shifts << [ordered_shifts[i].period.begins_at, ordered_shifts[j - 1].period.ends_at, ordered_shifts[i].participation.team.name]
+
+    end
+
+    ShiftNotifier.notification(self, compacted_shifts).deliver
+  end
+
   private
 
   def callback_after_create
