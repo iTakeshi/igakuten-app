@@ -135,8 +135,9 @@ class Staff < ActiveRecord::Base
       j += 1 if j == ordered_shifts.length - 1 && !breaked
       skip_until = j
 
-      compacted_shifts << [ordered_shifts[i].period.begins_at, ordered_shifts[j - 1].period.ends_at, ordered_shifts[i].participation.team.name]
-
+      unless ordered_shifts[i].participation.team.name == '休憩'
+        compacted_shifts << [ordered_shifts[i].period.begins_at, ordered_shifts[j - 1].period.ends_at, ordered_shifts[i].participation.team.name]
+      end
     end
 
     ShiftNotifier.notification(self, compacted_shifts).deliver
